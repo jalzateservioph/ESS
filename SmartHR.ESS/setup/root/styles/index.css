@@ -1,0 +1,76 @@
+﻿* {
+	margin:0;
+	padding:0;
+}
+
+html, body {
+	background: #ffffff;
+	font-family: Tahoma, Arial, Helvetica, Sans-Serif, Verdana;
+	font-size: 10pt;
+	width: 100%;
+}
+
+a {
+	color: #5689c5;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #f39128;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #5689c5;
+	text-decoration: none;
+}
+
+a:visited:hover {
+	color: #f39128;
+	text-decoration: none;
+}
+
+.page_full {
+	bottom: 0px;
+	left: 0px;
+	position: fixed;
+	right: 0px;
+	top: 0px;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.title {
+	background-image: url(../images/titlebar.jpg);
+	height: 100%;
+	width: 100%;
+}
+
+.padding {
+	padding: 10px;
+}
+
+.upper {
+	text-transform: uppercase;
+}
+
+.dgHeader {
+    background-image: url('../images/dgvHeader.jpg');
+    background-repeat: repeat-x;
+}
+
+.pad_left {
+    padding-left: 15px;
+}
+
+.maxPicture {
+    max-height: 75px;
+    max-width: 125px;
+}
+
+.cpCenter {
+    text-align: center;
+}

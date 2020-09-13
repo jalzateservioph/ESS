@@ -1,0 +1,11 @@
+--CREATE FIELD FOR PlantBranch Text 
+IF NOT EXISTS (
+  SELECT *
+  FROM   INFORMATION_SCHEMA.COLUMNS
+  WHERE  TABLE_NAME = 'RelWorkingInTMP'
+         AND COLUMN_NAME = 'PlantBranch'
+) 
+BEGIN
+	--Create the field
+	ALTER TABLE [RelWorkingInTMP] ADD PlantBranch NVARCHAR(100);
+END

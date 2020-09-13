@@ -1,0 +1,11 @@
+--CREATE FIELD FOR ExamDate Text 
+IF NOT EXISTS (
+  SELECT *
+  FROM   INFORMATION_SCHEMA.COLUMNS
+  WHERE  TABLE_NAME = 'License'
+         AND COLUMN_NAME = 'ExamDate'
+) 
+BEGIN
+	--Create the field
+	ALTER TABLE [License] ADD ExamDate DATETIME;
+END

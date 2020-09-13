@@ -1,0 +1,1 @@
+<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="delivery.aspx.vb" Inherits="SmartHR.delivery" %>

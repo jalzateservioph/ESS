@@ -1,0 +1,23 @@
+--CREATE FIELD FOR OJTCompAddr Text 
+IF NOT EXISTS (
+  SELECT *
+  FROM   INFORMATION_SCHEMA.COLUMNS
+  WHERE  TABLE_NAME = 'Experience'
+         AND COLUMN_NAME = 'OJTCompAddr'
+) 
+BEGIN
+	--Create the field
+	ALTER TABLE [Experience] ADD OJTCompAddr NVARCHAR(300);
+END
+
+--CREATE FIELD FOR OJTRespon Text 
+IF NOT EXISTS (
+  SELECT *
+  FROM   INFORMATION_SCHEMA.COLUMNS
+  WHERE  TABLE_NAME = 'Experience'
+         AND COLUMN_NAME = 'OJTRespon'
+) 
+BEGIN
+	--Create the field
+	ALTER TABLE [Experience] ADD OJTRespon NVARCHAR(300);
+END

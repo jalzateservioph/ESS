@@ -1,0 +1,36 @@
+/****** Object:  StoredProcedure [dbo].[prInsertToPerformance]    Script Date: 3/22/2019 1:41:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[dbo].[prInsertToPerformance]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+BEGIN
+	PRINT 'Dropping Procedure prInsertToPerformance'
+	DROP PROCEDURE [dbo].[prInsertToPerformance]	
+END
+
+PRINT N'Creating [dbo].[prInsertToPerformance]...';
+GO
+
+CREATE procedure [dbo].[prInsertToPerformance]
+@PERIOD_FROM DATETIME,
+@PERIOD_TO DATETIME,
+@RATE_DATE DATETIME,
+@RATER VARCHAR(100),
+@RATE_CODE VARCHAR(10),
+@MAN_NO VARCHAR(50),
+@JOBTITLE_CODE VARCHAR(20),
+@PAYLVL_CODE VARCHAR(20),
+@RATE_TYPE VARCHAR(20),
+@PAYGRP_CODE VARCHAR(20)
+AS
+BEGIN
+	INSERT INTO prPerformance 
+	VALUES 
+	(
+		@PERIOD_FROM,@PERIOD_TO,@RATE_DATE,
+		@RATER,@RATE_CODE,@MAN_NO,@JOBTITLE_CODE,
+		@PAYLVL_CODE,@RATE_TYPE,@PAYGRP_CODE
+	)
+END

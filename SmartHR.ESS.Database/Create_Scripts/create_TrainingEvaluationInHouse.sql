@@ -1,0 +1,80 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[dbo].[TrainingEvaluationInHouse]') AND OBJECTPROPERTY(ID, N'ISTABLE') = 1)
+BEGIN
+	CREATE TABLE [dbo].TrainingEvaluationInHouse(
+		[ID] [int] IDENTITY(1,1) NOT NULL,
+		[CompanyNum] [nvarchar](20) NOT NULL,
+		[EmployeeName] [nvarchar](100) NOT NULL,
+		[EmployeeNum] [nvarchar](12) NOT NULL,
+		[TrainingDate] [datetime] NOT NULL,
+		[CourseName] [nvarchar] (100) NOT NULL,
+		[Provider] [nvarchar] (100) NOT NULL,
+		[Facilitator] [nvarchar] (100) NOT NULL,
+		[Division] [nvarchar] (100) NOT NULL,
+		[Department] [nvarchar] (100) NOT NULL,
+		[Section] [nvarchar] (100) NOT NULL,
+		[Response_1_1] [tinyint] NOT NULL,
+		[Strengths_1_1] [nvarchar](255) NULL,
+		[AreasOfImprovement_1_1] [nvarchar](255) NULL,
+		[Response_1_2] [tinyint] NOT NULL,
+		[Strengths_1_2] [nvarchar](255) NULL,
+		[AreasOfImprovement_1_2] [nvarchar](255) NULL,
+		[Response_1_3] [tinyint] NOT NULL,
+		[Strengths_1_3] [nvarchar](255) NULL,
+		[AreasOfImprovement_1_3] [nvarchar](255) NULL,
+		[Response_1_4] [tinyint] NOT NULL,
+		[Strengths_1_4] [nvarchar](255) NULL,
+		[AreasOfImprovement_1_4] [nvarchar](255) NULL,
+		[Response_1_5] [tinyint] NOT NULL,
+		[Strengths_1_5] [nvarchar](255) NULL,
+		[AreasOfImprovement_1_5] [nvarchar](255) NULL,
+		[Response_2_1] [tinyint] NOT NULL,
+		[Strengths_2_1] [nvarchar](255) NULL,
+		[AreasOfImprovement_2_1] [nvarchar](255) NULL,
+		[Response_2_2] [tinyint] NOT NULL,
+		[Strengths_2_2] [nvarchar](255) NULL,
+		[AreasOfImprovement_2_2] [nvarchar](255) NULL,
+		[Response_2_3] [tinyint] NOT NULL,
+		[Strengths_2_3] [nvarchar](255) NULL,
+		[AreasOfImprovement_2_3] [nvarchar](255) NULL,
+		[Response_3_1] [tinyint] NOT NULL,
+		[Strengths_3_1] [nvarchar](255) NULL,
+		[AreasOfImprovement_3_1] [nvarchar](255) NULL,
+		[Response_3_2] [tinyint] NOT NULL,
+		[Strengths_3_2] [nvarchar](255) NULL,
+		[AreasOfImprovement_3_2] [nvarchar](255) NULL,
+		[Response_4_1] [tinyint] NOT NULL,
+		[Strengths_4_1] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_1] [nvarchar](255) NULL,
+		[Response_4_2] [tinyint] NOT NULL,
+		[Strengths_4_2] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_2] [nvarchar](255) NULL,
+		[Response_4_3] [tinyint] NOT NULL,
+		[Strengths_4_3] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_3] [nvarchar](255) NULL,
+		[Response_4_4] [tinyint] NOT NULL,
+		[Strengths_4_4] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_4] [nvarchar](255) NULL,
+		[Response_4_5] [tinyint] NOT NULL,
+		[Strengths_4_5] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_5] [nvarchar](255) NULL,
+		[Response_4_6] [tinyint] NOT NULL,
+		[Strengths_4_6] [nvarchar](255) NULL,
+		[AreasOfImprovement_4_6] [nvarchar](255) NULL,
+		[Response_5_1] [tinyint] NOT NULL,
+		[Strengths_5_1] [nvarchar](255) NULL,
+		[AreasOfImprovement_5_1] [nvarchar](255) NULL,
+		[Remarks] [nvarchar](255) NOT NULL,
+		[DateSubmitted] [datetime] NULL,
+		[Status] [nvarchar](10) NULL,
+		[PathID] [bigint] NULL
+	 CONSTRAINT [PK_TrainingEvaluationInHouse] PRIMARY KEY NONCLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]	
+END

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="getfile.aspx.vb" Inherits="SmartHR.getfile" %>

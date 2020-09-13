@@ -1,0 +1,26 @@
+/****** Object:  View [dbo].[prViewNewDataPH]    Script Date: 4/3/2019 6:00:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF EXISTS(SELECT 1 FROM sys.views WHERE [Name] = 'prViewNewDataPH' AND [Type]='V')
+	DROP VIEW prViewNewDataPH;
+GO
+
+PRINT N'Creating [dbo].[prViewNewDataPH]...';
+GO
+
+CREATE VIEW [dbo].[prViewNewDataPH]
+AS
+	SELECT 
+		A.EMPLOYEE_NUMBER	AS 'EMPLOYEE NUMBER', 
+		A.PROMOTION_DATE	AS 'PROMOTION DATE',
+		A.EMPLOYEE_CATEGORY	AS 'EMPLOYEE CATEGORY',
+		A.PAY_LEVEL			AS 'PAY LEVEL',
+		A.JOB_GRADE			AS 'JOB GRADE',
+		A.EMPLOYEE_CLASS	AS 'EMPLOYEE CLASS',
+		A.POSITION			AS 'POSITION'
+	FROM [prPromotionHistoryTemp] a
+
+GO

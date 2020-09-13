@@ -1,0 +1,13 @@
+<%Body%>
+
+To login to the ESS simply visit the site at <%WebServer%>
+
+Regards,
+Employee Self Service
+
+-----------------------------------------------------------------
+
+*** Notices ***
+Please note that this account is an unattended account, do not reply to this email.
+
+If you have any questions please contact your HR Administrator.

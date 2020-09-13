@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DS_SHR">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>server='rnddmsdb'; user id='sa'; password='*WebWorks!'; Database='TMP-SHR-DEV';</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>fae1e75c-53f1-42ea-b01f-c179b30603ef</DataSourceID>
+</RptDataSource>
