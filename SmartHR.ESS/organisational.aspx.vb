@@ -456,7 +456,7 @@ Partial Public Class organisational
 
             LoadExpDS(dsShirtSize, "select distinct [AttributeValue] as ShirtSize from [PersonnelAttribute] where ([AttributeName] = 'SHIRT SIZE' and [CompanyNum] = '" & .CompanyNum & "') order by [AttributeValue]")
 
-            LoadExpCmb(cmbShirtSize, "<select>")
+            'LoadExpCmb(cmbShirtSize, "<select>")
 
             '26/06/2019 amanriza
             'fixed shirtsize combobox returning to its default value upon reload.
@@ -582,74 +582,74 @@ Partial Public Class organisational
 
                     'lblLocation.Visible = cmbLocation.Visible
 
-                    txtBlazer.Value = .Item("Blazer")
-                    SetPolicy(txtBlazer, "Blazer")
-                    lblBlazer.Visible = txtBlazer.Visible
+                    'txtBlazer.Value = .Item("Blazer")
+                    'SetPolicy(txtBlazer, "Blazer")
+                    'lblBlazer.Visible = txtBlazer.Visible
 
 
-                    txtSkirt.Value = .Item("Skirt")
-                    SetPolicy(txtSkirt, "Skirt")
-                    lblSkirt.Visible = txtSkirt.Visible
+                    'txtSkirt.Value = .Item("Skirt")
+                    'SetPolicy(txtSkirt, "Skirt")
+                    'lblSkirt.Visible = txtSkirt.Visible
 
-                    txtBlouse.Value = .Item("Blouse")
+                    'txtBlouse.Value = .Item("Blouse")
 
-                    SetPolicy(txtBlouse, "Blouse")
+                    'SetPolicy(txtBlouse, "Blouse")
 
-                    lblBlouse.Visible = txtBlouse.Visible
+                    'lblBlouse.Visible = txtBlouse.Visible
 
-                    txtSlacks.Value = .Item("Slacks")
+                    'txtSlacks.Value = .Item("Slacks")
 
-                    SetPolicy(txtSlacks, "Slacks")
+                    'SetPolicy(txtSlacks, "Slacks")
 
-                    lblSlacks.Visible = txtSlacks.Visible
+                    'lblSlacks.Visible = txtSlacks.Visible
 
-                    txtShirtjack.Value = .Item("Shirtjack")
+                    'txtShirtjack.Value = .Item("Shirtjack")
 
-                    SetPolicy(txtShirtjack, "Shirtjack")
+                    'SetPolicy(txtShirtjack, "Shirtjack")
 
-                    lblShirtjack.Visible = txtShirtjack.Visible
+                    'lblShirtjack.Visible = txtShirtjack.Visible
 
-                    txtShirtjackPants.Value = .Item("ShirtjackPants")
+                    'txtShirtjackPants.Value = .Item("ShirtjackPants")
 
-                    SetPolicy(txtShirtjackPants, "ShirtjackPants")
+                    'SetPolicy(txtShirtjackPants, "ShirtjackPants")
 
-                    lblShirtjackPants.Visible = txtShirtjackPants.Visible
+                    'lblShirtjackPants.Visible = txtShirtjackPants.Visible
 
-                    txtPoloBarong.Value = .Item("PoloBarong")
+                    'txtPoloBarong.Value = .Item("PoloBarong")
 
-                    SetPolicy(txtPoloBarong, "PoloBarong")
+                    'SetPolicy(txtPoloBarong, "PoloBarong")
 
-                    lblPoloBarong.Visible = txtPoloBarong.Visible
+                    'lblPoloBarong.Visible = txtPoloBarong.Visible
 
-                    txtRepellantPants.Value = .Item("RepellantPants")
+                    'txtRepellantPants.Value = .Item("RepellantPants")
 
-                    SetPolicy(txtRepellantPants, "RepellantPants")
+                    'SetPolicy(txtRepellantPants, "RepellantPants")
 
-                    lblRepellantPants.Visible = txtRepellantPants.Visible
+                    'lblRepellantPants.Visible = txtRepellantPants.Visible
 
-                    txtPoloShirt.Value = .Item("PoloShirt")
+                    'txtPoloShirt.Value = .Item("PoloShirt")
 
-                    SetPolicy(txtPoloShirt, "PoloShirt")
+                    'SetPolicy(txtPoloShirt, "PoloShirt")
 
-                    lblPoloShirt.Visible = txtPoloShirt.Visible
+                    'lblPoloShirt.Visible = txtPoloShirt.Visible
 
-                    txtMaongPants.Value = .Item("MaongPants")
+                    'txtMaongPants.Value = .Item("MaongPants")
 
-                    SetPolicy(txtMaongPants, "MaongPants")
+                    'SetPolicy(txtMaongPants, "MaongPants")
 
-                    lblMaongPants.Visible = txtMaongPants.Visible
+                    'lblMaongPants.Visible = txtMaongPants.Visible
 
-                    txtTShirt.Value = .Item("TShirt")
+                    'txtTShirt.Value = .Item("TShirt")
 
-                    SetPolicy(txtTShirt, "TShirt")
+                    'SetPolicy(txtTShirt, "TShirt")
 
-                    lblTShirt.Visible = txtTShirt.Visible
+                    'lblTShirt.Visible = txtTShirt.Visible
 
-                    txtOveralls.Value = .Item("Overalls")
+                    'txtOveralls.Value = .Item("Overalls")
 
-                    SetPolicy(txtOveralls, "Overalls")
+                    'SetPolicy(txtOveralls, "Overalls")
 
-                    lblOveralls.Visible = txtOveralls.Visible
+                    'lblOveralls.Visible = txtOveralls.Visible
 
 #Region "REVISED UNIFORM FIELDS"
 
@@ -855,18 +855,18 @@ Partial Public Class organisational
 
                     End If
 
-                    ' Shirt Size
-                    If (Not IsNull(.Item("ShirtSize"))) Then
+                    '' Shirt Size
+                    'If (Not IsNull(.Item("ShirtSize"))) Then
 
-                        SetComboValue(cmbShirtSize, .Item("ShirtSize").ToString())
+                    '    SetComboValue(cmbShirtSize, .Item("ShirtSize").ToString())
 
-                        items_saved.Add("ShirtSize", cmbShirtSize.Value)
+                    '    items_saved.Add("ShirtSize", cmbShirtSize.Value)
 
-                    End If
+                    'End If
 
-                    SetPolicy(cmbShirtSize, "ShirtSize")
+                    'SetPolicy(cmbShirtSize, "ShirtSize")
 
-                    lblShirtSize.Visible = cmbShirtSize.Visible
+                    'lblShirtSize.Visible = cmbShirtSize.Visible
 
 
                     SetPolicy(dteDateJoinedGroup, "DateJoinedGroup")

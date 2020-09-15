@@ -665,7 +665,7 @@
                                         <td style="width: 250px; text-align: left"></td>
                                         <td />
                                     </tr>
-                                    <tr>
+                                    <%--<tr>
                                         <td style="text-align: right">
                                             <dxe:ASPxLabel ID="lblBlazer" runat="server" Text="Blazer" />
                                         </td>
@@ -793,7 +793,7 @@
                                         <td style="text-align: left">
                                             <dxe:ASPxComboBox ID="cmbShirtSize" runat="server" ClientInstanceName="cmbShirtSize" DataSourceID="dsShirtSize" TextField="ShirtSize" ValueField="ShirtSize" DropDownStyle="DropDownList" EnableIncrementalFiltering="true" />
                                         </td>
-                                    </tr>
+                                    </tr>--%>
                                     <%--<tr>
                                         <td style="text-align: right">
                                             <dxe:ASPxLabel ID="lblMALE_MGRSpecialPoloshirt" runat="server" Text="MGR Special Poloshirt" />
