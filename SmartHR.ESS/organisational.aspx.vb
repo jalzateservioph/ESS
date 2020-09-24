@@ -652,7 +652,6 @@ Partial Public Class organisational
                     'lblOveralls.Visible = txtOveralls.Visible
 
 #Region "REVISED UNIFORM FIELDS"
-
                     txtMALE_MGRSpecialPoloshirt.Value = .Item("MALE_MGRSpecialPoloshirt")
                     SetPolicy(txtMALE_MGRSpecialPoloshirt, "MALE_MGRSpecialPoloshirt")
                     lblMALE_MGRSpecialPoloshirt.Visible = txtMALE_MGRSpecialPoloshirt.Visible

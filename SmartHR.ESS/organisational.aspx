@@ -1057,6 +1057,17 @@
 
                                     </tr>--%>
                                     <tr>
+                                        <td colspan="3">
+                                            <dxe:ASPxLabel ID="ASPxLabel1" runat="server" Text="Male Uniform" style="font-weight:600;font-size:inherit;" />
+                                        </td>
+                                        <td colspan="3">
+                                            <dxe:ASPxLabel ID="ASPxLabel2" runat="server" Text="Female Uniform" style="font-weight:600;font-size:inherit;" />
+                                        </td>
+                                        <td colspan="3">
+                                            <dxe:ASPxLabel ID="ASPxLabel3" runat="server" Text="Unisex" style="font-weight:600;font-size:inherit;" />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td style="text-align: right">
                                             <dxe:ASPxLabel ID="lblMALE_MGRSpecialPoloshirt" runat="server" Text="MGR Special Poloshirt" />
                                         </td>
@@ -1235,6 +1246,18 @@
                                         <td></td>
                                     </tr>
                                     <!-- reserved fields -->
+                                    <tr style="height:20px;"></tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <dxe:ASPxLabel ID="ASPxLabel4" runat="server" Text="Reserved Male Uniform" style="font-weight:600;font-size:inherit;" />
+                                        </td>
+                                        <td colspan="3">
+                                            <dxe:ASPxLabel ID="ASPxLabel5" runat="server" Text="Reserved Female Uniform" style="font-weight:600;font-size:inherit;" />
+                                        </td>
+                                        <td colspan="3">
+                                            
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
