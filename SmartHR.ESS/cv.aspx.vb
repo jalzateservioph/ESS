@@ -228,7 +228,7 @@ Partial Public Class cv
             pcSpace_005.Visible = panel_005.Visible
             'amanriza 05/31/219
             'changed keyname
-            Panel_006.Visible = GetArrayItem(.Template, "eCurriculumVitae.SeminarsAndTraining")
+            Panel_006.Visible = GetArrayItem(.Template, "eCurriculumVitae.Seminars")
             'amanriza end
             pcSpace_006.Visible = Panel_006.Visible
 

@@ -1697,6 +1697,24 @@ Partial Public Class personal
     Protected WithEvents txtSpouseMiddleName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
+    '''lblHouseholdCount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHouseholdCount As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''txtHouseholdCount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHouseholdCount As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
     '''lblSpouseBirthDate control.
     '''</summary>
     '''<remarks>

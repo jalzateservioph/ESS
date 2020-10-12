@@ -532,6 +532,11 @@ Partial Public Class personal
                     SetPolicy(txtSpouseAddress, "SpouseAddress")
                     lblSpouseAddress.Visible = txtSpouseAddress.Visible
 
+                    txtHouseholdCount.Value = .Item("HouseholdCount")
+                    items_saved.Add("HouseholdCount", txtHouseholdCount.Value)
+                    SetPolicy(txtHouseholdCount, "HouseholdCount")
+                    lblHouseholdCount.Visible = txtHouseholdCount.Visible
+
                     SetComboValue(cmbShuttlePreference, .Item("ShuttleRoute").ToString())
                     items_saved.Add("ShuttleRoute", cmbShuttlePreference.Value)
                     SetPolicy(cmbShuttlePreference, "ShuttleRoute")
@@ -756,7 +761,7 @@ Partial Public Class personal
 
                     SetComboValue(cmbMaritalStatus, .Item("MaritalStatus").ToString())
 
-                    items_saved.Add("MaritalStatus", cmbMaritalStatus.Value)
+                    items_saved.Add("MaritalStatusage", cmbMaritalStatus.Value)
 
                     SetPolicy(cmbMaritalStatus, "MaritalStatus")
 

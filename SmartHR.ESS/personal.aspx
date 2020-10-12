@@ -2114,6 +2114,14 @@
                                         <asp:TableCell Width="100px" />
                                         <asp:TableCell Width="10px" />
                                         <asp:TableCell Width="250px" />
+                                        <asp:TableCell Width="10px" />
+                                        <asp:TableCell Width="250px" />
+                                        <asp:TableCell Width="10px" />
+                                        <asp:TableCell Width="250px" />
+                                        <asp:TableCell Width="10px" />
+                                        <asp:TableCell Width="250px" />
+                                        <asp:TableCell Width="10px" />
+                                        <asp:TableCell Width="250px" />
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell HorizontalAlign="Right">
@@ -2177,6 +2185,20 @@
 
 
                                         </asp:TableCell>
+
+
+                                        <asp:TableCell />
+                                        <asp:TableCell HorizontalAlign="Left">
+                                            <dxe:ASPxLabel ID="lblHouseholdCount" runat="server" Text="Household Members" />
+
+                                        </asp:TableCell>
+                                        <asp:TableCell />
+                                        <asp:TableCell HorizontalAlign="Left">
+                                            <dxe:ASPxTextBox ID="txtHouseholdCount" runat="server" Width="250px" ClientInstanceName="txtHouseholdCount" ReadOnly="false" Enabled="True" />
+
+                                        </asp:TableCell>
+
+
                                     </asp:TableRow>
                                     <asp:TableRow Height="3px">
                                         <asp:TableCell ColumnSpan="11" />

@@ -132,7 +132,7 @@ Partial Public Class linkdocs
 
         With UDetails
 
-            LoadExpGrid(Session, dgView, "Linked Documents", "<Tablename=PersonnelDocLink><PrimaryKey=[CompanyNum] + ' ' + [EmployeeNum] + ' ' + [DocPath] + ' ' + [Category]><InsertKey='" & .CompanyNum & "', '" & .EmployeeNum & "'><Columns=[Category], [DocDescription], [DocPath], [ESSLinked], [ESSPath], [UserLinked], [DateLinked]><Where=([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "' and [ESSLinked] = 1)>", "Data.LinkedDocs." & Session.SessionID)
+            LoadExpGrid(Session, dgView, "Linked Documents", "<Tablename=PersonnelDocLink><PrimaryKey=[CompanyNum] + ' ' + [EmployeeNum] + ' ' + [DocPath] + ' ' + [Category]><InsertKey='" & .CompanyNum & "', '" & .EmployeeNum & "'><Columns=[Category], [DocDescription], [DocPath], [ESSLinked], [ESSPath], [UserLinked], [DateLinked]><Where=([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "')>", "Data.LinkedDocs." & Session.SessionID)
 
         End With
 

@@ -398,7 +398,7 @@ Partial Public Class organisational
 
         LoadExpCmb(cmbAppointype, "<select>")
 
-        LoadExpDS(dsSkill_Level, "select [OccupCategory] from [OccupCategoryLU] order by [OccupCategory]")
+        LoadExpDS(dsSkill_Level, "select [OccupCategory] from [OccupCategoryLU]  order by [OccupCategory]")
 
         LoadExpCmb(cmbSkill_Level, "<select>")
 
@@ -653,153 +653,189 @@ Partial Public Class organisational
 
 #Region "REVISED UNIFORM FIELDS"
                     txtMALE_MGRSpecialPoloshirt.Value = .Item("MALE_MGRSpecialPoloshirt")
+                    items_saved.Add("MALE_MGRSpecialPoloshirt", txtMALE_MGRSpecialPoloshirt.Value)
                     SetPolicy(txtMALE_MGRSpecialPoloshirt, "MALE_MGRSpecialPoloshirt")
                     lblMALE_MGRSpecialPoloshirt.Visible = txtMALE_MGRSpecialPoloshirt.Visible
 
                     txtMALE_SUSpecialPoloshirt.Value = .Item("MALE_SUSpecialPoloshirt")
+                    items_saved.Add("MALE_SUSpecialPoloshirt", txtMALE_SUSpecialPoloshirt.Value)
                     SetPolicy(txtMALE_SUSpecialPoloshirt, "MALE_SUSpecialPoloshirt")
                     lblMALE_SUSpecialPoloshirt.Visible = txtMALE_SUSpecialPoloshirt.Visible
 
                     txtMALE_Polo.Value = .Item("MALE_Polo")
+                    items_saved.Add("MALE_Polo", txtMALE_Polo.Value)
                     SetPolicy(txtMALE_Polo, "MALE_Polo")
                     lblMALE_Polo.Visible = txtMALE_Polo.Visible
 
                     txtMALE_MaleShirtpackShort.Value = .Item("MALE_MaleShirtpackShort")
+                    items_saved.Add("MALE_MaleShirtpackShort", txtMALE_MaleShirtpackShort.Value)
                     SetPolicy(txtMALE_MaleShirtpackShort, "MALE_MaleShirtpackShort")
                     lblMALE_MaleShirtpackShort.Visible = txtMALE_MaleShirtpackShort.Visible
 
                     txtMALE_MaleShirtPackLong.Value = .Item("MALE_MaleShirtPackLong")
+                    items_saved.Add("MALE_MaleShirtPackLong", txtMALE_MaleShirtPackLong.Value)
                     SetPolicy(txtMALE_MaleShirtPackLong, "MALE_MaleShirtPackLong")
                     lblMALE_MaleShirtPackLong.Visible = txtMALE_MaleShirtPackLong.Visible
 
                     txtMALE_MaleBlackPants.Value = .Item("MALE_MaleBlackPants")
+                    items_saved.Add("MALE_MaleBlackPants", txtMALE_MaleBlackPants.Value)
                     SetPolicy(txtMALE_MaleBlackPants, "MALE_MaleBlackPants")
                     lblMALE_MaleBlackPants.Visible = txtMALE_MaleBlackPants.Visible
 
                     txtFEMALE_MGRSpecialPoloshirt.Value = .Item("FEMALE_MGRSpecialPoloshirt")
+                    items_saved.Add("FEMALE_MGRSpecialPoloshirt", txtFEMALE_MGRSpecialPoloshirt.Value)
                     SetPolicy(txtFEMALE_MGRSpecialPoloshirt, "FEMALE_MGRSpecialPoloshirt")
                     lblFEMALE_MGRSpecialPoloshirt.Visible = txtFEMALE_MGRSpecialPoloshirt.Visible
 
                     txtFEMALE_SUSpecialPoloshirt.Value = .Item("FEMALE_SUSpecialPoloshirt")
+                    items_saved.Add("FEMALE_SUSpecialPoloshirt", txtFEMALE_SUSpecialPoloshirt.Value)
                     SetPolicy(txtFEMALE_SUSpecialPoloshirt, "FEMALE_SUSpecialPoloshirt")
                     lblFEMALE_SUSpecialPoloshirt.Visible = txtFEMALE_SUSpecialPoloshirt.Visible
 
                     txtFEMALE_Blouse.Value = .Item("FEMALE_Blouse")
+                    items_saved.Add("FEMALE_Blouse", txtFEMALE_Blouse.Value)
                     SetPolicy(txtFEMALE_Blouse, "FEMALE_Blouse")
                     lblFEMALE_Blouse.Visible = txtFEMALE_Blouse.Visible
 
                     txtFEMALE_FemaleShirtpackShort.Value = .Item("FEMALE_FemaleShirtpackShort")
+                    items_saved.Add("FEMALE_FemaleShirtpackShort", txtFEMALE_FemaleShirtpackShort.Value)
                     SetPolicy(txtFEMALE_FemaleShirtpackShort, "FEMALE_FemaleShirtpackShort")
                     lblFEMALE_FemaleShirtpackShort.Visible = txtFEMALE_FemaleShirtpackShort.Visible
 
                     txtFEMALE_FemaleShirtPackLong.Value = .Item("FEMALE_FemaleShirtPackLong")
+                    items_saved.Add("FEMALE_FemaleShirtPackLong", txtFEMALE_FemaleShirtPackLong.Value)
                     SetPolicy(txtFEMALE_FemaleShirtPackLong, "FEMALE_FemaleShirtPackLong")
                     lblFEMALE_FemaleShirtPackLong.Visible = txtFEMALE_FemaleShirtPackLong.Visible
 
                     txtFEMALE_FemaleBlackPants.Value = .Item("FEMALE_FemaleBlackPants")
+                    items_saved.Add("FEMALE_FemaleBlackPants", txtFEMALE_FemaleBlackPants.Value)
                     SetPolicy(txtFEMALE_FemaleBlackPants, "FEMALE_FemaleBlackPants")
                     lblFEMALE_FemaleBlackPants.Visible = txtFEMALE_FemaleBlackPants.Visible
 
                     txtFEMALE_Skirt.Value = .Item("FEMALE_Skirt")
+                    items_saved.Add("FEMALE_Skirt", txtFEMALE_Skirt.Value)
                     SetPolicy(txtFEMALE_Skirt, "FEMALE_Skirt")
                     lblFEMALE_Skirt.Visible = txtFEMALE_Skirt.Visible
 
                     txtFEMALE_Blazer.Value = .Item("FEMALE_Blazer")
+                    items_saved.Add("FEMALE_Blazer", txtFEMALE_Blazer.Value)
                     SetPolicy(txtFEMALE_Blazer, "FEMALE_Blazer")
                     lblFEMALE_Blazer.Visible = txtFEMALE_Blazer.Visible
 
                     txtUNISEX_ProdSUShirt.Value = .Item("UNISEX_ProdSUShirt")
+                    items_saved.Add("UNISEX_ProdSUShirt", txtUNISEX_ProdSUShirt.Value)
                     SetPolicy(txtUNISEX_ProdSUShirt, "UNISEX_ProdSUShirt")
                     lblUNISEX_ProdSUShirt.Visible = txtUNISEX_ProdSUShirt.Visible
 
                     txtUNISEX_ProdRNFShirt.Value = .Item("UNISEX_ProdRNFShirt")
+                    items_saved.Add("UNISEX_ProdRNFShirt", txtUNISEX_ProdRNFShirt.Value)
                     SetPolicy(txtUNISEX_ProdRNFShirt, "UNISEX_ProdRNFShirt")
                     lblUNISEX_ProdRNFShirt.Visible = txtUNISEX_ProdRNFShirt.Visible
 
                     txtUNISEX_MaongPants.Value = .Item("UNISEX_MaongPants")
+                    items_saved.Add("UNISEX_MaongPants", txtUNISEX_MaongPants.Value)
                     SetPolicy(txtUNISEX_MaongPants, "UNISEX_MaongPants")
                     lblUNISEX_MaongPants.Visible = txtUNISEX_MaongPants.Visible
 
                     txtUNISEX_RepellantPants.Value = .Item("UNISEX_RepellantPants")
+                    items_saved.Add("UNISEX_RepellantPants", txtUNISEX_RepellantPants.Value)
                     SetPolicy(txtUNISEX_RepellantPants, "UNISEX_RepellantPants")
                     lblUNISEX_RepellantPants.Visible = txtUNISEX_RepellantPants.Visible
 
                     txtRESERVEDMALE_RNFSpecialShirt.Value = .Item("RESERVEDMALE_RNFSpecialShirt")
+                    items_saved.Add("RESERVEDMALE_RNFSpecialShirt", txtRESERVEDMALE_RNFSpecialShirt.Value)
                     SetPolicy(txtRESERVEDMALE_RNFSpecialShirt, "RESERVEDMALE_RNFSpecialShirt")
                     lblRESERVEDMALE_RNFSpecialShirt.Visible = txtRESERVEDMALE_RNFSpecialShirt.Visible
 
                     txtRESERVEDMALE_CampaignShirt.Value = .Item("RESERVEDMALE_CampaignShirt")
+                    items_saved.Add("RESERVEDMALE_CampaignShirt", txtRESERVEDMALE_CampaignShirt.Value)
                     SetPolicy(txtRESERVEDMALE_CampaignShirt, "RESERVEDMALE_CampaignShirt")
                     lblRESERVEDMALE_CampaignShirt.Visible = txtRESERVEDMALE_CampaignShirt.Visible
 
                     txtRESERVEDMALE_SpecialShirt.Value = .Item("RESERVEDMALE_SpecialShirt")
+                    items_saved.Add("RESERVEDMALE_SpecialShirt", txtRESERVEDMALE_SpecialShirt.Value)
                     SetPolicy(txtRESERVEDMALE_SpecialShirt, "RESERVEDMALE_SpecialShirt")
                     lblRESERVEDMALE_SpecialShirt.Visible = txtRESERVEDMALE_SpecialShirt.Visible
 
                     txtRESERVEDMALE_Polo2.Value = .Item("RESERVEDMALE_Polo2")
+                    items_saved.Add("RESERVEDMALE_Polo2", txtRESERVEDMALE_Polo2.Value)
                     SetPolicy(txtRESERVEDMALE_Polo2, "RESERVEDMALE_Polo2")
                     lblRESERVEDMALE_Polo2.Visible = txtRESERVEDMALE_Polo2.Visible
 
                     txtRESERVEDMALE_Polo3.Value = .Item("RESERVEDMALE_Polo3")
+                    items_saved.Add("RESERVEDMALE_Polo3", txtRESERVEDMALE_Polo3.Value)
                     SetPolicy(txtRESERVEDMALE_Polo3, "RESERVEDMALE_Polo3")
                     lblRESERVEDMALE_Polo3.Visible = txtRESERVEDMALE_Polo3.Visible
 
                     txtRESERVEDMALE_MaleSlacks.Value = .Item("RESERVEDMALE_MaleSlacks")
+                    items_saved.Add("RESERVEDMALE_MaleSlacks", txtRESERVEDMALE_MaleSlacks.Value)
                     SetPolicy(txtRESERVEDMALE_MaleSlacks, "RESERVEDMALE_MaleSlacks")
                     lblRESERVEDMALE_MaleSlacks.Visible = txtRESERVEDMALE_MaleSlacks.Visible
 
                     txtRESERVEDMALE_MaleSlacks2.Value = .Item("RESERVEDMALE_MaleSlacks2")
+                    items_saved.Add("RESERVEDMALE_MaleSlacks2", txtRESERVEDMALE_MaleSlacks2.Value)
                     SetPolicy(txtRESERVEDMALE_MaleSlacks2, "RESERVEDMALE_MaleSlacks2")
                     lblRESERVEDMALE_MaleSlacks2.Visible = txtRESERVEDMALE_MaleSlacks2.Visible
 
                     txtRESERVEDMALE_MaleBlackPants2.Value = .Item("RESERVEDMALE_MaleBlackPants2")
+                    items_saved.Add("RESERVEDMALE_MaleBlackPants2", txtRESERVEDMALE_MaleBlackPants2.Value)
                     SetPolicy(txtRESERVEDMALE_MaleBlackPants2, "RESERVEDMALE_MaleBlackPants2")
                     lblRESERVEDMALE_MaleBlackPants2.Visible = txtRESERVEDMALE_MaleBlackPants2.Visible
 
                     txtRESERVEDMALE_MaleSpecialJacket.Value = .Item("RESERVEDMALE_MaleSpecialJacket")
+                    items_saved.Add("RESERVEDMALE_MaleSpecialJacket", txtRESERVEDMALE_MaleSpecialJacket.Value)
                     SetPolicy(txtRESERVEDMALE_MaleSpecialJacket, "RESERVEDMALE_MaleSpecialJacket")
                     lblRESERVEDMALE_MaleSpecialJacket.Visible = txtRESERVEDMALE_MaleSpecialJacket.Visible
 
                     txtRESERVEDFEMALE_RNFSpecialShirt.Value = .Item("RESERVEDFEMALE_RNFSpecialShirt")
+                    items_saved.Add("RESERVEDFEMALE_RNFSpecialShirt", txtRESERVEDFEMALE_RNFSpecialShirt.Value)
                     SetPolicy(txtRESERVEDFEMALE_RNFSpecialShirt, "RESERVEDFEMALE_RNFSpecialShirt")
                     lblRESERVEDFEMALE_RNFSpecialShirt.Visible = txtRESERVEDFEMALE_RNFSpecialShirt.Visible
 
                     txtRESERVEDFEMALE_CampaignShirt.Value = .Item("RESERVEDFEMALE_CampaignShirt")
+                    items_saved.Add("RESERVEDFEMALE_CampaignShirt", txtRESERVEDFEMALE_CampaignShirt.Value)
                     SetPolicy(txtRESERVEDFEMALE_CampaignShirt, "RESERVEDFEMALE_CampaignShirt")
                     lblRESERVEDFEMALE_CampaignShirt.Visible = txtRESERVEDFEMALE_CampaignShirt.Visible
 
                     txtRESERVEDFEMALE_SpecialShirt.Value = .Item("RESERVEDFEMALE_SpecialShirt")
+                    items_saved.Add("RESERVEDFEMALE_SpecialShirt", txtRESERVEDFEMALE_SpecialShirt.Value)
                     SetPolicy(txtRESERVEDFEMALE_SpecialShirt, "RESERVEDFEMALE_SpecialShirt")
                     lblRESERVEDFEMALE_SpecialShirt.Visible = txtRESERVEDFEMALE_SpecialShirt.Visible
 
                     txtRESERVEDFEMALE_Blouse2.Value = .Item("RESERVEDFEMALE_Blouse2")
+                    items_saved.Add("RESERVEDFEMALE_Blouse2", txtRESERVEDFEMALE_Blouse2.Value)
                     SetPolicy(txtRESERVEDFEMALE_Blouse2, "RESERVEDFEMALE_Blouse2")
                     lblRESERVEDFEMALE_Blouse2.Visible = txtRESERVEDFEMALE_Blouse2.Visible
 
                     txtRESERVEDFEMALE_Blouse3.Value = .Item("RESERVEDFEMALE_Blouse3")
+                    items_saved.Add("RESERVEDFEMALE_Blouse3", txtRESERVEDFEMALE_Blouse3.Value)
                     SetPolicy(txtRESERVEDFEMALE_Blouse3, "RESERVEDFEMALE_Blouse3")
                     lblRESERVEDFEMALE_Blouse3.Visible = txtRESERVEDFEMALE_Blouse3.Visible
 
                     txtRESERVEDFEMALE_FemaleSlacks.Value = .Item("RESERVEDFEMALE_FemaleSlacks")
+                    items_saved.Add("RESERVEDFEMALE_FemaleSlacks", txtRESERVEDFEMALE_FemaleSlacks.Value)
                     SetPolicy(txtRESERVEDFEMALE_FemaleSlacks, "RESERVEDFEMALE_FemaleSlacks")
                     lblRESERVEDFEMALE_FemaleSlacks.Visible = txtRESERVEDFEMALE_FemaleSlacks.Visible
 
                     txtRESERVEDFEMALE_FemaleSlacks2.Value = .Item("RESERVEDFEMALE_FemaleSlacks2")
+                    items_saved.Add("RESERVEDFEMALE_FemaleSlacks2", txtRESERVEDFEMALE_FemaleSlacks2.Value)
                     SetPolicy(txtRESERVEDFEMALE_FemaleSlacks2, "RESERVEDFEMALE_FemaleSlacks2")
                     lblRESERVEDFEMALE_FemaleSlacks2.Visible = txtRESERVEDFEMALE_FemaleSlacks2.Visible
 
                     txtRESERVEDFEMALE_FemaleBlackPants2.Value = .Item("RESERVEDFEMALE_FemaleBlackPants2")
+                    items_saved.Add("RESERVEDFEMALE_FemaleBlackPants2", txtRESERVEDFEMALE_FemaleBlackPants2.Value)
                     SetPolicy(txtRESERVEDFEMALE_FemaleBlackPants2, "RESERVEDFEMALE_FemaleBlackPants2")
                     lblRESERVEDFEMALE_FemaleBlackPants2.Visible = txtRESERVEDFEMALE_FemaleBlackPants2.Visible
 
                     txtRESERVEDFEMALE_Skirt2.Value = .Item("RESERVEDFEMALE_Skirt2")
+                    items_saved.Add("RESERVEDFEMALE_Skirt2", txtRESERVEDFEMALE_Skirt2.Value)
                     SetPolicy(txtRESERVEDFEMALE_Skirt2, "RESERVEDFEMALE_Skirt2")
                     lblRESERVEDFEMALE_Skirt2.Visible = txtRESERVEDFEMALE_Skirt2.Visible
 
                     txtRESERVEDFEMALE_FemaleSpecialJacket.Value = .Item("RESERVEDFEMALE_FemaleSpecialJacket")
+                    items_saved.Add("RESERVEDFEMALE_FemaleSpecialJacket", txtRESERVEDFEMALE_FemaleSpecialJacket.Value)
                     SetPolicy(txtRESERVEDFEMALE_FemaleSpecialJacket, "RESERVEDFEMALE_FemaleSpecialJacket")
                     lblRESERVEDFEMALE_FemaleSpecialJacket.Visible = txtRESERVEDFEMALE_FemaleSpecialJacket.Visible
-
 #End Region
 
                     ' division
@@ -1287,6 +1323,13 @@ Partial Public Class organisational
     End Sub
 
     Protected Sub tabOrganizational_ActiveTabChanged(source As Object, e As DevExpress.Web.ASPxTabControl.TabControlEventArgs) Handles tabOrganizational.ActiveTabChanged
+
+        If (e.Tab.Index = 5) Then
+            cmdSubmit.Visible = False
+            cmdSubmit.Enabled = False
+            cmdSubmit.ClientEnabled = False
+            cmdSubmit.ClientVisible = False
+        End If
 
     End Sub
 

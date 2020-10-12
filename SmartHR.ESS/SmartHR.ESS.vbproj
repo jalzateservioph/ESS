@@ -379,21 +379,21 @@
     </Compile>
     <Compile Include="conditions.aspx.vb">
       <DependentUpon>conditions.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="conditionsman.aspx.designer.vb">
       <DependentUpon>conditionsman.aspx</DependentUpon>
     </Compile>
     <Compile Include="conditionsman.aspx.vb">
       <DependentUpon>conditionsman.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="contacts.aspx.designer.vb">
       <DependentUpon>contacts.aspx</DependentUpon>
     </Compile>
     <Compile Include="contacts.aspx.vb">
       <DependentUpon>contacts.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="modules\main.vb" />
     <Compile Include="performanceman_002.aspx.designer.vb">
@@ -436,7 +436,7 @@
     </Compile>
     <Compile Include="employee.aspx.vb">
       <DependentUpon>employee.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="financial.aspx.designer.vb">
       <DependentUpon>financial.aspx</DependentUpon>
@@ -450,7 +450,7 @@
     </Compile>
     <Compile Include="getfile.aspx.vb">
       <DependentUpon>getfile.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="global.asax.vb">
       <DependentUpon>global.asax</DependentUpon>
@@ -642,7 +642,7 @@
     </Compile>
     <Compile Include="picture.aspx.vb">
       <DependentUpon>picture.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="preview.aspx.designer.vb">
       <DependentUpon>preview.aspx</DependentUpon>
@@ -676,22 +676,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>prMidEnd.rpt</DependentUpon>
-      <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="promotions.aspx.designer.vb">
       <DependentUpon>promotions.aspx</DependentUpon>
     </Compile>
     <Compile Include="promotions.aspx.vb">
       <DependentUpon>promotions.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="prPromotions1.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>prPromotions.rpt</DependentUpon>
-      <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="prReports.aspx.designer.vb">
       <DependentUpon>prReports.aspx</DependentUpon>
@@ -792,14 +792,14 @@
     </Compile>
     <Compile Include="terminate.aspx.vb">
       <DependentUpon>terminate.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="terminateman.aspx.designer.vb">
       <DependentUpon>terminateman.aspx</DependentUpon>
     </Compile>
     <Compile Include="terminateman.aspx.vb">
       <DependentUpon>terminateman.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="timesheets.aspx.designer.vb">
       <DependentUpon>timesheets.aspx</DependentUpon>
@@ -820,14 +820,14 @@
     </Compile>
     <Compile Include="tools\conditionsman.aspx.vb">
       <DependentUpon>conditionsman.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="tools\contacts.aspx.designer.vb">
       <DependentUpon>contacts.aspx</DependentUpon>
     </Compile>
     <Compile Include="tools\contacts.aspx.vb">
       <DependentUpon>contacts.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="tools\performanceman_004.aspx.designer.vb">
       <DependentUpon>performanceman_004.aspx</DependentUpon>
@@ -841,7 +841,7 @@
     </Compile>
     <Compile Include="tools\employee.aspx.vb">
       <DependentUpon>employee.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="tools\index.aspx.designer.vb">
       <DependentUpon>index.aspx</DependentUpon>
@@ -862,7 +862,7 @@
     </Compile>
     <Compile Include="tools\timesheets.aspx.vb">
       <DependentUpon>timesheets.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="training.aspx.designer.vb">
       <DependentUpon>training.aspx</DependentUpon>
@@ -876,14 +876,14 @@
     </Compile>
     <Compile Include="trainingagreementman.aspx.vb">
       <DependentUpon>trainingagreementman.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="trainingevaluation.aspx.designer.vb">
       <DependentUpon>trainingevaluation.aspx</DependentUpon>
     </Compile>
     <Compile Include="trainingevaluation.aspx.vb">
       <DependentUpon>trainingevaluation.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="trainingman.aspx.designer.vb">
       <DependentUpon>trainingman.aspx</DependentUpon>
@@ -897,14 +897,14 @@
     </Compile>
     <Compile Include="transfer.aspx.vb">
       <DependentUpon>transfer.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="transferman.aspx.designer.vb">
       <DependentUpon>transferman.aspx</DependentUpon>
     </Compile>
     <Compile Include="transferman.aspx.vb">
       <DependentUpon>transferman.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TWSCorporation.aspx.designer.vb">
       <DependentUpon>TWSCorporation.aspx</DependentUpon>
@@ -918,14 +918,14 @@
     </Compile>
     <Compile Include="TWSDepartmental.aspx.vb">
       <DependentUpon>TWSDepartmental.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TWSDivisional.aspx.designer.vb">
       <DependentUpon>TWSDivisional.aspx</DependentUpon>
     </Compile>
     <Compile Include="TWSDivisional.aspx.vb">
       <DependentUpon>TWSDivisional.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="twsreports.aspx.designer.vb">
       <DependentUpon>twsreports.aspx</DependentUpon>
@@ -939,7 +939,7 @@
     </Compile>
     <Compile Include="TWSSectional.aspx.vb">
       <DependentUpon>TWSSectional.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="workflow.aspx.designer.vb">
       <DependentUpon>workflow.aspx</DependentUpon>
