@@ -1107,7 +1107,7 @@
                         case 1: dgView_002.Refresh(); cmdSubmit.SetEnabled(false); break; 
                         case 2: dgView_003.Refresh(); cmdSubmit.SetEnabled(false); break;
                         case 3: dgView_Movement.Refresh(); cmdSubmit.SetEnabled(false); break; 
-                        case 4: cmdSubmit.SetEnabled(true); break;
+                        case 4: cmdSubmit.SetEnabled(false); break;
                     }; 
                     }" />
             </dxtc:ASPxPageControl>
