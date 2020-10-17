@@ -395,6 +395,7 @@
       <DependentUpon>contacts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Enumerations.vb" />
     <Compile Include="modules\main.vb" />
     <Compile Include="performanceman_002.aspx.designer.vb">
       <DependentUpon>performanceman_002.aspx</DependentUpon>

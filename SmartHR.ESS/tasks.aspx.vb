@@ -476,7 +476,11 @@ Partial Public Class tasks
 
                     Case "Change"
                         'Added another status 'Returned'
-                        SQL = String.Format("SELECT [NotifyDate] AS [Date], (SELECT [Key] FROM [ess.Policy] WHERE ([ID] = [C].[PolicyID])) AS [Item], [ValueF] AS [Changed From], [ValueT] AS [Changed To], (CASE WHEN ActionedBy = 1 THEN 'Approved' WHEN ActionedBy = 0 THEN 'Returned' ELSE 'Rejected' END) AS [Status] FROM (SELECT *, NULL AS ActionedBy FROM [ess.Change] WHERE PathID <> '{0}' UNION SELECT * FROM [ess.Reject]) AS [C] WHERE [PathID] = '{0}' ORDER BY [PolicyID]", PathID.ToString())
+
+                        Dim a = EssApprovalHelper.CreateCaseQuery("ActionedBy")
+
+                        SQL = String.Format("SELECT [NotifyDate] AS [Date], (SELECT [Key] FROM [ess.Policy] WHERE ([ID] = [C].[PolicyID])) AS [Item], [ValueF] AS [Changed From], [ValueT] AS [Changed To], (" & EssApprovalHelper.CreateCaseQuery("ActionedBy") & ") AS [Status] FROM (select * from [ess.Reject] where PathID = {0} union select *, case when (select count(1) from [ess.Reject] where PathID = {0} ) > 0 then 0 else -1 end as ActionedBy from [ess.Change] where PathID =  (case when (select count(1) from [ess.Reject] where PathID ={0} ) > 0 then null else {0} end)) AS [C] WHERE [PathID] = '{0}' ORDER BY [PolicyID]", PathID.ToString())
+                        'SQL = String.Format("SELECT [NotifyDate] AS [Date], (SELECT [Key] FROM [ess.Policy] WHERE ([ID] = [C].[PolicyID])) AS [Item], [ValueF] AS [Changed From], [ValueT] AS [Changed To], (CASE WHEN ActionedBy = 2 THEN 'Completed' WHEN ActionedBy = -1 THEN 'No Action Yet' WHEN ActionedBy = 1 THEN 'Approved' WHEN ActionedBy = 0 THEN 'Returned' ELSE 'Rejected' END) AS [Status] FROM (select * from [ess.Reject] where PathID = {0} union select *, case when (select count(1) from [ess.Reject] where PathID = {0} ) > 0 then 0 else -1 end as ActionedBy from [ess.Change] where PathID =  (case when (select count(1) from [ess.Reject] where PathID ={0} ) > 0 then null else {0} end)) AS [C] WHERE [PathID] = '{0}' ORDER BY [PolicyID]", PathID.ToString())
                         'SQL = String.Format("SELECT A.NotifyDate AS [Date], (SELECT [Key] FROM [ess.Policy] WHERE ([ID] = [B].[PolicyID])) AS [Item], A.[ValueF] AS [Changed From], A.[ValueT] AS [Changed To], (CASE WHEN B.ActionedBy = 1 THEN 'Approved' WHEN ActionedBy = 0 THEN 'Returned' ELSE 'Rejected' END ) AS [Status] FROM [ess.Change] A  RIGHT JOIN [ess.Reject] B ON B.PathID = A.PathID WHERE A.PathID = {0} ORDER BY B.PolicyID", PathID.ToString())
                     Case "Claims"
                         SQL = "select [Date] as [Claim Date], [Type], [CapturedDate] as [Captured On], [Username] as [Captured By], (select sum([Amount]) from [ClaimEntries] where ([CompanyNum] + ' ' + [EmployeeNum] + ' ' + convert(nvarchar(19), [Date], 120) + ' ' + [Type] = (select [CompanyNum] + ' ' + [EmployeeNum] + ' ' + convert(nvarchar(19), [Date], 120) + ' ' + [Type] from [Claims] where ([PathID] = " & PathID.ToString() & ")))) as [Total Claim], [Status], [Description] from [Claims] where ([PathID] = " & PathID.ToString() & ")"
@@ -570,8 +574,14 @@ Partial Public Class tasks
                                 cpHtmlText &= Convert.ToSingle(dtData.Rows(x).Item(i)).ToString("0.00")
 
                             Else
+                                If (i = 1) Then
 
-                                cpHtmlText &= dtData.Rows(x).Item(i).ToString()
+                                    Dim itemName = GetSQLDT("select top 1 ItemName from [ess.PolicyMapping] where FieldName = '" & dtData.Rows(x).Item(i).ToString() & "'")
+
+                                    cpHtmlText &= itemName.Rows(0).Item(0).ToString()
+                                Else
+                                    cpHtmlText &= dtData.Rows(x).Item(i).ToString()
+                                End If
 
                             End If
 
@@ -590,7 +600,7 @@ Partial Public Class tasks
                 cpShowDetails = True
 
             Catch ex As Exception
-
+                Dim a = ex
             Finally
 
                 If (Not IsNull(dtData)) Then

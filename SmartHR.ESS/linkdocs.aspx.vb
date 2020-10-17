@@ -18,7 +18,7 @@ Partial Public Class linkdocs
             Dim drivePath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive")
             Dim folderPath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathFolder")
             If (Not Directory.Exists(String.Format("{0}:/{1}", drivePath, folderPath))) Then 'added directory creation 
-                Directory.CreateDirectory(folderPath)
+                Directory.CreateDirectory(String.Format("{0}:/{1}", drivePath, folderPath))
             End If
             Dim empNum As String = UDetails.EmployeeNum.ToString().Trim()
             'Dim empNum As String = Session("LoggedOn").EmployeeNum.ToString.Trim()

@@ -17,6 +17,7 @@
     </head>
     <body onload="window.parent.reset();">
         <form id="_cv" runat="server">
+
             <div class="padding">
                 <dxtc:ASPxPageControl ID="tabCV" runat="server" Width="100%" ActiveTabIndex="0">
                     <TabPages>

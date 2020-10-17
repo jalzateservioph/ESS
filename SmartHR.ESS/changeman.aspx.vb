@@ -208,27 +208,27 @@
 
                 If (Columns(1).EndsWith(", ")) Then Columns(1) = Columns(1).Substring(0, Columns(1).Length - 2)
 
-                If (Columns(0).Length > 0) Then
+                'If (Columns(0).Length > 0) Then
 
-                    SQL(0) = SQL(0).Replace("[%Columns%]", Columns(0))
+                '    SQL(0) = SQL(0).Replace("[%Columns%]", Columns(0))
 
-                    'RNaanep 05032016
-                    If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager") And (Values(0).ToUpper() = "APPROVE") Then
-                        bSaved = ExecSQL(SQL(0))
-                    End If
+                '    'RNaanep 05032016
+                '    If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager") And (Values(0).ToUpper() = "APPROVE") Then
+                '        bSaved = ExecSQL(SQL(0))
+                '    End If
 
-                End If
+                'End If
 
-                If (Columns(1).Length > 0) Then
+                'If (Columns(1).Length > 0) Then
 
-                    SQL(1) = SQL(1).Replace("[%Columns%]", Columns(1))
+                '    SQL(1) = SQL(1).Replace("[%Columns%]", Columns(1))
 
-                    'RNaanep 05032016
-                    If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager") And (Values(0).ToUpper() = "APPROVE") Then
-                        bSaved = ExecSQL(SQL(1))
-                    End If
+                '    'RNaanep 05032016
+                '    If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager") And (Values(0).ToUpper() = "APPROVE") Then
+                '        bSaved = ExecSQL(SQL(1))
+                '    End If
 
-                End If
+                'End If
 
                 If (bSaved Or Columns(0).ToString().Contains("Dependants")) Then
 
@@ -287,20 +287,26 @@
 
                         If (bSaved Or Columns(0).ToString().Contains("Dependants")) Then
 
-                            'added to adjust previous actioner.
+                            ''added to adjust previous actioner.
                             If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager" And (JustApproved > 0)) Then
                                 'bSaved = ExecSQL("exec [ess.WFProc] '" & OriginatorDetails(0) & "', '" & OriginatorDetails(1) & "', '" & UDetails.CompanyNum & "', '" & UDetails.EmployeeNum & "', " & PathID & ", 'Change', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & GetXML(PathData, KeyName:="ActionType") & "', '" & Now.ToString("yyyy-MM-dd HH:mm:ss") & "'")
                                 bSaved = ExecSQL("exec [ess.WFProc] '" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & OriginatorDetails(0) & "', '" & OriginatorDetails(1) & "', " & PathID & ", 'Change', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & GetXML(PathData, KeyName:="ActionType") & "', '" & Now.ToString("yyyy-MM-dd HH:mm:ss") & "'")
-                            End If
-                            'amanriza - 05/02/2019
-                            'Added a condition if the item is approved
-                            If (HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
-                                bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = 1 WHERE PathID = " & PathID & "")
 
-                            Else
-                                bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject] SELECT *, 1 FROM [ess.Change] WHERE PathID = " & PathID & " "))
+                                '    ExecSQL("update [ess.Reject] set ActionedBy = 2 where PathID = '" & PathID & "'")
                             End If
-                            'amanriza - end
+                            ''amanriza - 05/02/2019
+                            ''Added a condition if the item is approved
+                            'If (HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
+                            '    If ((GetXML(PathData, KeyName:="ActionType")) = "HR Manager" And (JustApproved > 0)) Then
+                            '        bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = " & DirectCast(ESSActionedBy.Completed, Int32) & " WHERE PathID = " & PathID & "")
+                            '    Else
+                            '        bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = " & DirectCast(ESSActionedBy.InProgress, Int32) & " WHERE PathID = " & PathID & "")
+                            '    End If
+
+                            'Else
+                            '        bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject] SELECT *, " & DirectCast(ESSActionedBy.InProgress, Int32) & " FROM [ess.Change] WHERE PathID = " & PathID & " "))
+                            'End If
+                            ''amanriza - end
 
                             If (Values(1).Length > 0) Then bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
 
@@ -320,10 +326,11 @@
 
                                 'Added a condition if the item is rejected
                                 If (HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
-                                    bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & OriginatorDetails(1) & "' WHERE PathID = " & PathID & "")
+                                    bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & DirectCast(ESSActionedBy.Rejected, Int32) & "' WHERE PathID = " & PathID & "")
+                                    'bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & OriginatorDetails(1) & "' WHERE PathID = " & PathID & "")
                                 Else
-                                    bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" &
-                                        "SELECT *,'" & OriginatorDetails(1) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
+                                    bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & DirectCast(ESSActionedBy.Rejected, Int32) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
+                                    'bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & OriginatorDetails(1) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
 
                                 End If
 
@@ -347,7 +354,7 @@
                             If (Not HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
 
                                 bSaved = ExecSQL("INSERT INTO [ess.Reject]" &
-                                                              "SELECT *, 0 FROM [ess.Change] WHERE PathID = " & PathID & " ")
+                                                              "SELECT *, " & DirectCast(ESSActionedBy.Returned, Int32) & " FROM [ess.Change] WHERE PathID = " & PathID & " ")
                             End If
 
                             SendEmailThreadWithBodyActions(New Object() {ServerPath, GetEmailID(IIf(StatusCheck(0).ToString() = "RETURN", "Change: Submitted Revision", "Change: Returned for Revision")), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, PathID,

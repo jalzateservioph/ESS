@@ -484,6 +484,17 @@ Check:
 
     End Sub
 
+    Protected Sub YesNoPopup_Yes_Click(sender As Object, e As EventArgs)
+        Dim a = 1
+    End Sub
+
+    Protected Sub YesNoPopup_No_Click(sender As Object, e As EventArgs)
+
+        Dim a = 1
+    End Sub
+
 #End Region
+
+
 
 End Class

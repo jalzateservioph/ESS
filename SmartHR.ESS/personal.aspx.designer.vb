@@ -32,6 +32,33 @@ Partial Public Class personal
     Protected WithEvents _personal As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
+    '''YesNoPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents YesNoPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''YesNoPopup_Yes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents YesNoPopup_Yes As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''YesNoPopup_No control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents YesNoPopup_No As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''cpPage control.
     '''</summary>
     '''<remarks>

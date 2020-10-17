@@ -19,6 +19,36 @@
 </head>
 <body onload="window.parent.reset();">
     <form id="_personal" runat="server">
+
+        <dxpc:ASPxPopupControl ID="YesNoPopup" runat="server" ClientInstanceName="YesNoPopup" AllowDragging="true" CloseAction="CloseButton" EnableAnimation="false" Modal="true" 
+            PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" HeaderImage-Url="images/info.png" HeaderText="Submit Confirmation">
+            <ContentCollection>
+                <dxpc:PopupControlContentControl runat="server">
+                    <div style="width: 250px; text-align: center">
+                        Do you want to submit changes for approval? 
+                    </div>
+                    <br />
+                    <div class="centered" style="width: 80px">
+                        <table class="center">
+                            <tr>
+                                <td>
+                                    <dxe:ASPxButton ID="YesNoPopup_Yes" runat="server" ClientInstanceName="YesNoPopup_Yes" Text="Yes" Height="25px" Width="80px" AutoPostBack="false" >
+                                        <ClientSideEvents Click="function(s, e) { YesNoPopup.Hide(); window.parent.lpPage.Show(); cpPage.PerformCallback('Submit'); alert('test'); }" />
+                                    </dxe:ASPxButton>
+                                </td>
+                                <td>
+                                    <dxe:ASPxButton ID="YesNoPopup_No" runat="server" ClientInstanceName="YesNoPopup_No" Text="No" Height="25px" Width="80px" AutoPostBack="false" >
+                                        <ClientSideEvents Click="function(s, e) { YesNoPopup.Hide(); }" />
+                                    </dxe:ASPxButton>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </dxpc:PopupControlContentControl>
+            </ContentCollection>
+            <ClientSideEvents PopUp="function(s, e) { YesNoPopup.AdjustSize(); YesNoPopup_Yes.SetFocus(); }" />
+        </dxpc:ASPxPopupControl>
+
         <dxcb:ASPxCallback ID="cpPage" runat="server" ClientInstanceName="cpPage">
             <ClientSideEvents CallbackComplete="function(s, e) { if (e.result.toLowerCase().indexOf('.aspx') != -1) { window.parent.postUrl(e.result, false); } }" />
         </dxcb:ASPxCallback>
@@ -1115,7 +1145,7 @@
             <br />
             <div class="centered" style="width: 80px">
                 <dxe:ASPxButton ID="cmdSubmit" runat="server" Text="Submit" Width="80px" AutoPostBack="false" ClientEnabled="true" ClientInstanceName="cmdSubmit" EnableClientSideAPI="true">
-                    <ClientSideEvents Click="function(s, e) { if (ASPxClientEdit.ValidateGroup()) { window.parent.lpPage.Show(); cpPage.PerformCallback('Submit'); } }" />
+                    <ClientSideEvents Click="function(s, e) { if (ASPxClientEdit.ValidateGroup()) { YesNoPopup.Show(); } }" />
                 </dxe:ASPxButton>
             </div>
         </div>

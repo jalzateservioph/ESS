@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class cv
-    
+
     '''<summary>
     '''Head1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
-    
+
     '''<summary>
     '''_cv control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents _cv As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+
     '''<summary>
     '''tabCV control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tabCV As Global.DevExpress.Web.ASPxTabControl.ASPxPageControl
-    
+
     '''<summary>
     '''ContentControl1 control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentControl1 As Global.DevExpress.Web.ASPxClasses.ContentControl
-    
+
     '''<summary>
     '''dgExports_001 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_001 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_001 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_001 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''panel_001 control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents panel_001 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_001 control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_001 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_001 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_001 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''delete_001 control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents delete_001 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''dgExports_007 control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_007 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_007 control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_007 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''panel_007 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents panel_007 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_007 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_007 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_007 control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_007 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''delete_007 control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents delete_007 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''ContentControl5 control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentControl5 As Global.DevExpress.Web.ASPxClasses.ContentControl
-    
+
     '''<summary>
     '''dgExports_002 control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_002 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''dgExports_004 control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_004 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_002 control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_002 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''panel_002 control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents panel_002 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_002 control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_002 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_002 control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_002 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''delete_002 control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents delete_002 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''ContentControl99 control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentControl99 As Global.DevExpress.Web.ASPxClasses.ContentControl
-    
+
     '''<summary>
     '''dgExports_003 control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_003 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_003 control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_003 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''Panel_003 control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel_003 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_003 control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_003 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_003 control.
     '''</summary>
@@ -282,7 +282,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_003 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''delete_003 control.
     '''</summary>
@@ -291,7 +291,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents delete_003 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''ContentControl9 control.
     '''</summary>
@@ -300,7 +300,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentControl9 As Global.DevExpress.Web.ASPxClasses.ContentControl
-    
+
     '''<summary>
     '''dgExports_005 control.
     '''</summary>
@@ -309,7 +309,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_005 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_005 control.
     '''</summary>
@@ -318,7 +318,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_005 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''panel_005 control.
     '''</summary>
@@ -327,7 +327,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents panel_005 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_005 control.
     '''</summary>
@@ -336,7 +336,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_005 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_005 control.
     '''</summary>
@@ -345,7 +345,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_005 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''GridViewCommandColumnCustomButton1 control.
     '''</summary>
@@ -354,7 +354,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents GridViewCommandColumnCustomButton1 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''ContentControl10 control.
     '''</summary>
@@ -363,7 +363,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentControl10 As Global.DevExpress.Web.ASPxClasses.ContentControl
-    
+
     '''<summary>
     '''dgExports_006 control.
     '''</summary>
@@ -372,7 +372,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgExports_006 As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''phSpace_006 control.
     '''</summary>
@@ -381,7 +381,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phSpace_006 As Global.System.Web.UI.WebControls.PlaceHolder
-    
+
     '''<summary>
     '''Panel_006 control.
     '''</summary>
@@ -390,7 +390,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel_006 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
-    
+
     '''<summary>
     '''pcSpace_006 control.
     '''</summary>
@@ -399,7 +399,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcSpace_006 As Global.DevExpress.Web.ASPxPanel.PanelContent
-    
+
     '''<summary>
     '''dgView_006 control.
     '''</summary>
@@ -408,7 +408,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dgView_006 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''GridViewCommandColumnCustomButton2 control.
     '''</summary>
@@ -417,7 +417,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents GridViewCommandColumnCustomButton2 As Global.DevExpress.Web.ASPxGridView.GridViewCommandColumnCustomButton
-    
+
     '''<summary>
     '''dsInstitution control.
     '''</summary>
@@ -426,7 +426,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dsInstitution As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''dsJobGrade control.
     '''</summary>
@@ -435,7 +435,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dsJobGrade As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''dsJobTitle control.
     '''</summary>
@@ -444,7 +444,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dsJobTitle As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''dsNQFLevel control.
     '''</summary>
@@ -453,7 +453,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dsNQFLevel As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''dsQualification control.
     '''</summary>
@@ -462,7 +462,7 @@ Partial Public Class cv
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dsQualification As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''dsSubject control.
     '''</summary>
