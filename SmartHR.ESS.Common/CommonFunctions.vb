@@ -476,4 +476,24 @@ Public Module CommonFunctions
 
     End Function
 
+    Public Function AddSpacesToWordGroups(ByVal value As String) As String
+
+        Dim a = value.ToString()
+
+        Dim name = ""
+
+        For index As Int32 = 0 To a.Length - 1 Step 1
+
+            If Char.IsUpper(a(index)) Then
+                name &= " "
+            End If
+
+            name &= a(index)
+
+        Next
+
+        Return name.Trim()
+
+    End Function
+
 End Module
