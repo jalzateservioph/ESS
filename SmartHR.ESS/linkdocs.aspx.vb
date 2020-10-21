@@ -17,14 +17,14 @@ Partial Public Class linkdocs
         Try
             Dim drivePath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive")
             Dim folderPath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathFolder")
-            If (Not Directory.Exists(String.Format("{0}:/{1}", drivePath, folderPath))) Then 'added directory creation 
-                Directory.CreateDirectory(String.Format("{0}:/{1}", drivePath, folderPath))
+            If (Not Directory.Exists(String.Format("{0}/{1}", drivePath, folderPath))) Then 'added directory creation 
+                Directory.CreateDirectory(String.Format("{0}/{1}", Server.MapPath("~"), folderPath))
             End If
             Dim empNum As String = UDetails.EmployeeNum.ToString().Trim()
             'Dim empNum As String = Session("LoggedOn").EmployeeNum.ToString.Trim()
 
-            Dim UploadPath As String = String.Format("{0}:\{1}\{2}",
-                                                     drivePath,
+            Dim UploadPath As String = String.Format("{0}\{1}\{2}",
+                                                     Server.MapPath("~"),
                                                      folderPath,
                                                      empNum)
 
@@ -80,6 +80,12 @@ Partial Public Class linkdocs
                                                     FilePath)
 
                         ReturnText &= String.Format("<VirtualPath=~/{0}/{1}/{2}>",
+                                                    folderPath,
+                                                    empNum,
+                                                    FileStripped)
+
+                        ReturnText &= String.Format("<ServerPath={0}/{1}/{2}/{3}>",
+                                                    Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd("/"),
                                                     folderPath,
                                                     empNum,
                                                     FileStripped)
@@ -307,7 +313,7 @@ Partial Public Class linkdocs
 
                 Dim DocPath As String = LinkDocsGetFileData(Me, upDocument.UploadedFiles(0))
 
-                Session("DocPath") = GetDataText(GetXML(DocPath, KeyName:="UNCPath"))
+                Session("DocPath") = GetDataText(GetXML(DocPath, KeyName:="ServerPath"))
 
                 e.NewValues("DocPath") = Session("DocPath")
 
@@ -348,8 +354,12 @@ Partial Public Class linkdocs
 
     Protected Function GetClickUrl(ByVal Container As DevExpress.Web.ASPxGridView.GridViewDataItemTemplateContainer) As String
 
-        Dim ReturnText As String = "function(s, e) { window.open('" & System.Configuration.ConfigurationManager.AppSettings.Get("SaveWebsite") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", "/") & "', 'download'); }"
+        Dim ReturnText As String = "function(s, e) { window.open('" & Container.Grid.GetRowValues(Container.VisibleIndex, "DocPath").ToString().Replace("~/", "/") & "', 'download'); }"
+
         If (Not File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then ReturnText = String.Empty
+
+        'Dim ReturnText As String = "function(s, e) { window.open('" & System.Configuration.ConfigurationManager.AppSettings.Get("SaveWebsite") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", "/") & "', 'download'); }"
+        'If (Not File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then ReturnText = String.Empty
 
         Return ReturnText
 
