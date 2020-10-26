@@ -1,4 +1,5 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports System.Web.UI.MobileControls.Adapters
+Imports DevExpress.Web.ASPxEditors
 Imports DevExpress.Web.ASPxGridView
 Imports DevExpress.Web.ASPxGridView.Export
 
@@ -70,20 +71,20 @@ Partial Public Class personal
                         'Adjusted condition of some snippets according to the recent change of controls default values. 
                         If (Not objValue(0).Equals(objValue(1)) AndAlso Not objValue(0).Equals(String.Empty) AndAlso Not (objValue(0).Equals(String.Empty) And IsNull(objValue(1)))) Then
 
-                                If (IsNull(objValue(1))) Then objValue(1) = "{null}"
+                            If (IsNull(objValue(1))) Then objValue(1) = "{null}"
 
-                                SQL &= "<PolicyID[" & bIndex.ToString("000") & "]=" & .Item("ID").ToString() & "><AssemblyID[" & bIndex.ToString("000") & "]=" & .Item("AssemblyID").ToString() & "><Key[" & bIndex.ToString("000") & "]=" & .Item("Key").ToString() & "><Label[" & bIndex.ToString("000") & "]=" & .Item("Label").ToString() & "><ValueF[" & bIndex.ToString("000") & "]=" & objValue(1) & "><ValueT[" & bIndex.ToString("000") & "]=" & objValue(0) & ">"
+                            SQL &= "<PolicyID[" & bIndex.ToString("000") & "]=" & .Item("ID").ToString() & "><AssemblyID[" & bIndex.ToString("000") & "]=" & .Item("AssemblyID").ToString() & "><Key[" & bIndex.ToString("000") & "]=" & .Item("Key").ToString() & "><Label[" & bIndex.ToString("000") & "]=" & .Item("Label").ToString() & "><ValueF[" & bIndex.ToString("000") & "]=" & objValue(1) & "><ValueT[" & bIndex.ToString("000") & "]=" & objValue(0) & ">"
 
-                                bIndex += 1
-
-                            End If
-                            'end
-                            objControl = Nothing
-
-                            objValue(0) = Nothing
-                            objValue(1) = Nothing
+                            bIndex += 1
 
                         End If
+                        'end
+                        objControl = Nothing
+
+                        objValue(0) = Nothing
+                        objValue(1) = Nothing
+
+                    End If
 
                 End With
 
@@ -594,6 +595,8 @@ Partial Public Class personal
                     SetPolicy(cmbCountryOfBirth, "CountryOfBirth")
                     lblCountryOfBirth.Visible = cmbCountryOfBirth.Visible
 
+                    Dim a = .Item("RecInterestHob")
+
                     txtInterestsHobbies.Text = .Item("RecInterestHob").ToString()
                     items_saved.Add("RecInterestHob", txtInterestsHobbies.Text)
                     SetPolicy(txtInterestsHobbies, "RecInterestHob")
@@ -995,6 +998,23 @@ Partial Public Class personal
 
         End With
 
+        If (Request.QueryString.Count > 0 And IsPostBack) Then
+
+            Dim message = "Changes have been Submitted."
+
+            If (Request.QueryString("hasChanges") = "True") Then
+                message = "Changes have been saved."
+            End If
+
+            If (Request.QueryString("hasForApproval") = "True") Then
+                message &= " Items for approval has also been submitted and will be sent to your approvers."
+            End If
+
+            SuccessPrompt_Message.InnerText = message
+
+            System.Web.UI.ScriptManager.RegisterStartupScript(Me, [GetType](), "test_script", "SuccessPrompt.Show();", True)
+        End If
+
     End Sub
 
     ''' <summary>
@@ -1008,6 +1028,9 @@ Partial Public Class personal
 
         Dim SQL As String = ChangedSQL()
 
+        Dim hasChanges = False
+        Dim hasForApproval = False
+
         If (SQL.Length > 0) Then
 
             With UDetails
@@ -1017,8 +1040,11 @@ Partial Public Class personal
 
                 Dim NotifyDate As String = Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-                Dim ChangeSQL As String = "update [Personnel] set "
-                Dim ChangeSQL1 As String = "update [Personnel1] set "
+                Dim PersonnelQuery = "update [Personnel] set "
+                Dim Personnel1Query = "update [Personnel1] set "
+
+                Dim PersonnelChangeQuery = ""
+                Dim Personnel1ChangeQuery = ""
 
                 Dim iCount As Byte = Convert.ToByte(GetXML(SQL, KeyName:="Count"))
 
@@ -1032,7 +1058,7 @@ Partial Public Class personal
                 '' set new ess.change value
                 For iLoop As Integer = 0 To (iCount - 1)
 
-                    PolicyID = Convert.ToInt16(GetXML(SQL, KeyName:="PolicyID[" & iLoop.ToString("000") & "]"))
+                    PolicyID = Convert.ToInt32(GetXML(SQL, KeyName:="PolicyID[" & iLoop.ToString("000") & "]"))
 
                     AssemblyID = Convert.ToByte(GetXML(SQL, KeyName:="AssemblyID[" & iLoop.ToString("000") & "]"))
 
@@ -1048,59 +1074,86 @@ Partial Public Class personal
 
                     ExecSQL("insert into [ess.Change]([CompanyNum], [EmployeeNum], [NotifyDate], [PolicyID], [AssemblyID], [Template], [ValueF], [ValueT], [Level]) VALUES ('" & .CompanyNum & "', '" & .EmployeeNum & "', '" & NotifyDate & "', " & PolicyID.ToString() & ", " & AssemblyID.ToString() & ", 'Personal Tab', '" & ValueF & "', '" & ValueT & "', '" & Level(0).ToString() & "')")
 
-                    If (bChange AndAlso bLogChange) Then ExecSQL("insert into [PersonnelHistoryLog]([CompanyNum], [EmployeeNum], [ActionDescription], [ActionDate], [ChangedFrom], [ChangedTo], [ChangedBy], [Remarks]) values('" & .CompanyNum & "', '" & .EmployeeNum & "', '" & LabelDesc & "', '" & NotifyDate & "', '" & ValueF & "', '" & ValueT & "', '" & .UserID & "', 'ESS: Changed by User')")
+                    Dim tempValue = ""
 
-                    If (FindPolicyTableName(PolicyID) = "Personnel1") Then 'amanriza - Added check to identify which table that policy resides in.
-                        ChangeSQL1 &= "[" & KeyDesc & "] = '" & ValueT & "'"
-                        If (iLoop < (iCount - 1)) Then
-                            ChangeSQL1 &= ","
-                        End If
+                    If (GetXML(SQL, KeyName:="Assembly ID[" & iLoop.ToString("000") & "]") <> "5") Then
+                        tempValue &= "[" & KeyDesc & "] = '" & ValueT & "'"
                     Else
-                        ChangeSQL &= "[" & KeyDesc & "] = '" & ValueT & "'"
-                        If (iLoop < (iCount - 1)) Then
-                            ChangeSQL &= ","
+
+                        If (ValueT = "True") Then
+                            ValueT = 1
+                        Else
+                            ValueT = 0
                         End If
+
+                        tempValue &= "[" & KeyDesc & "] = " & ValueT
+                    End If
+
+                    If (iLoop < (iCount - 1)) Then
+                        tempValue &= ","
+                    End If
+
+                    ' 0 = No Approval
+                    ' 1 = For Approval
+                    Dim queryIndex = Convert.ToInt32(GetArrayItem(UDetails.Template, "ePersonal." & KeyDesc & ".Approval"))
+
+                    If (queryIndex = 1) Then
+
+                        hasForApproval = True
+
+                    Else
+                        If (FindPolicyTableName(PolicyID) = "Personnel1") Then
+                            Personnel1Query &= tempValue
+
+                            Personnel1ChangeQuery &= "insert into [ess.reject]([CompanyNum], [EmployeeNum], [NotifyDate], [PolicyID], [AssemblyID], [Template], [ValueF], [ValueT], [Level], [ActionedBy]) VALUES ('" & .CompanyNum & "', '" & .EmployeeNum & "', '" & NotifyDate & "', " & PolicyID.ToString() & ", " & AssemblyID.ToString() & ", 'Personal Tab', '" & ValueF & "', '" & ValueT & "', '" & 0 & "', '" & DirectCast(ESSActionedBy.Completed, Integer) & "'); "
+
+                        Else
+                            PersonnelQuery &= tempValue
+
+                            PersonnelChangeQuery &= "insert into [ess.reject]([CompanyNum], [EmployeeNum], [NotifyDate], [PolicyID], [AssemblyID], [Template], [ValueF], [ValueT], [Level], [ActionedBy]) VALUES ('" & .CompanyNum & "', '" & .EmployeeNum & "', '" & NotifyDate & "', " & PolicyID.ToString() & ", " & AssemblyID.ToString() & ", 'Personal Tab', '" & ValueF & "', '" & ValueT & "', '" & 0 & "', '" & DirectCast(ESSActionedBy.Completed, Integer) & "'); "
+                        End If
+                    End If
+
+                    If (bLogChange) Then
+                        ExecSQL("insert into [PersonnelHistoryLog]([CompanyNum], [EmployeeNum], [ActionDescription], [ActionDate], [ChangedFrom], [ChangedTo], [ChangedBy], [Remarks]) values('" & .CompanyNum & "', '" & .EmployeeNum & "', '" & LabelDesc & "', '" & NotifyDate & "', '" & ValueF & "', '" & ValueT & "', '" & .UserID & "', 'ESS: Changed by User')")
                     End If
 
                 Next
 
-                If (ChangeSQL.Substring(ChangeSQL.Length - 1, 1) = ",") Then 'amanriza - check if the last char is ',' and remove it.
-                    ChangeSQL = ChangeSQL.Remove(ChangeSQL.Length - 1)
-                End If
-                If (ChangeSQL1.Substring(ChangeSQL1.Length - 1, 1) = ",") Then
-                    ChangeSQL1 = ChangeSQL1.Remove(ChangeSQL1.Length - 1)
-                End If
+                PersonnelQuery = PersonnelQuery.Trim(",")
+                Personnel1Query = Personnel1Query.Trim(",")
 
-
-                If (ChangeSQL1 = "update [Personnel1] set ") Then
-                    ChangeSQL = String.Empty
+                If (PersonnelQuery.EndsWith("set ")) Then
+                    PersonnelQuery = ""
                 Else
-                    ChangeSQL &= " WHERE ([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "')"
+                    PersonnelQuery &= " WHERE ([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "');"
                 End If
-                If (ChangeSQL1 = "update [Personnel] set ") Then
-                    ChangeSQL1 = String.Empty
+
+                If (Personnel1Query.EndsWith("set ")) Then
+                    Personnel1Query = ""
                 Else
-                    ChangeSQL1 &= " WHERE ([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "')" 'amanriza - added filter for ChangeSQL1 query. 
-
+                    Personnel1Query &= " WHERE ([CompanyNum] = '" & .CompanyNum & "' and [EmployeeNum] = '" & .EmployeeNum & "');"
                 End If
 
-                ChangeSQL = ChangeSQL + "; " + ChangeSQL1 'combine to queries to execute as one.
-                If (bChange) Then 'proceed if personelChange policy is set to true
+                Dim forUpdateQuery = PersonnelQuery & " " & Personnel1Query
 
-                    If (ExecSQL(ChangeSQL) = True) Then
+                ' NO APPROVAL; DIRECT UPDATE OF VALUES
+                If (Not (String.IsNullOrEmpty(forUpdateQuery.Trim())) And ExecSQL(forUpdateQuery) = True) Then
 
-                        If (ExecSQL("exec [ess.WFProc] '" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & .CompanyNum & "', '" & .EmployeeNum & "', 0, 'Change', 'Notify', 'Start', 'Start', '" & NotifyDate & "'")) Then
+                    hasChanges = True
 
-                            ClearPersonalCache(Session.SessionID)
+                    If (ExecSQL("exec [ess.WFProc] '" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & .CompanyNum & "', '" & .EmployeeNum & "', 0, 'Change', 'Notify', 'Start', 'Start', '" & NotifyDate & "'")) Then
 
-                            ReturnText = "tasks.aspx tools/index.aspx"
+                        ClearPersonalCache(Session.SessionID)
 
-                        End If
+                        ExecSQL(Personnel1ChangeQuery & " " & PersonnelChangeQuery)
 
                     End If
 
-                Else
+                End If
 
+                ' FOR APPROVAL
+                If (hasForApproval) Then
                     '(0) - email
                     '(1) - for approval
                     '(2) - auto approve.
@@ -1127,16 +1180,16 @@ Partial Public Class personal
                         SendEmailThread(New Object() {ServerPath, GetEmailID("Change: Auto-Approve"), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, objPathData(0).ToString()})
 
                     End If
-
                 End If
-
             End With
 
+            'ReturnText = "personal.aspx?submitted=true&message=" & Server.UrlEncode(message) & " tools/index.aspx"
+            ReturnText = "personal.aspx?hasChanges=" & hasChanges & "&hasForApproval=" & hasForApproval & " tools/index.aspx"
         Else
 
             ClearPersonalCache(Session.SessionID)
 
-            ReturnText = "tasks.aspx tools/index.aspx"
+            ReturnText = "personal.aspx tools/index.aspx"
 
         End If
 

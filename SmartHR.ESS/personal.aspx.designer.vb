@@ -59,6 +59,33 @@ Partial Public Class personal
     Protected WithEvents YesNoPopup_No As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''SuccessPrompt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SuccessPrompt As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''SuccessPrompt_Message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SuccessPrompt_Message As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''SuccessPrompt_OK control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SuccessPrompt_OK As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''cpPage control.
     '''</summary>
     '''<remarks>
