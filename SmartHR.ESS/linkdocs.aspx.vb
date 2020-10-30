@@ -17,7 +17,7 @@ Partial Public Class linkdocs
         Try
             Dim drivePath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive")
             Dim folderPath As String = System.Configuration.ConfigurationManager.AppSettings.Get("SavePathFolder")
-            If (Not Directory.Exists(String.Format("{0}/{1}", drivePath, folderPath))) Then 'added directory creation 
+            If (Not Directory.Exists(String.Format("{0}/{1}", Server.MapPath("~"), folderPath))) Then 'added directory creation 
                 Directory.CreateDirectory(String.Format("{0}/{1}", Server.MapPath("~"), folderPath))
             End If
             Dim empNum As String = UDetails.EmployeeNum.ToString().Trim()
@@ -85,7 +85,7 @@ Partial Public Class linkdocs
                                                     FileStripped)
 
                         ReturnText &= String.Format("<ServerPath={0}/{1}/{2}/{3}>",
-                                                    Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd("/"),
+                                                    System.Configuration.ConfigurationManager.AppSettings.Get("SaveWebsite"),
                                                     folderPath,
                                                     empNum,
                                                     FileStripped)
@@ -356,7 +356,9 @@ Partial Public Class linkdocs
 
         Dim ReturnText As String = "function(s, e) { window.open('" & Container.Grid.GetRowValues(Container.VisibleIndex, "DocPath").ToString().Replace("~/", "/") & "', 'download'); }"
 
-        If (Not File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then ReturnText = String.Empty
+        If (Not File.Exists(Server.MapPath(Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath")))) Then
+            ReturnText = String.Empty
+        End If
 
         'Dim ReturnText As String = "function(s, e) { window.open('" & System.Configuration.ConfigurationManager.AppSettings.Get("SaveWebsite") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", "/") & "', 'download'); }"
         'If (Not File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then ReturnText = String.Empty
@@ -368,7 +370,8 @@ Partial Public Class linkdocs
     Protected Function GetImgUrl(ByVal Container As DevExpress.Web.ASPxGridView.GridViewDataItemTemplateContainer) As String
 
         Dim ReturnText As String = "images/"
-        If (File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then
+
+        If (File.Exists(Server.MapPath(Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath")))) Then
 
             ReturnText &= "select"
 
@@ -386,7 +389,7 @@ Partial Public Class linkdocs
 
         Dim ReturnText As String = "Open File"
 
-        If (Not File.Exists(System.Configuration.ConfigurationManager.AppSettings.Get("SavePathDrive") & Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Replace("~/", ":\").Replace("/", "\"))) Then
+        If (Not File.Exists(Server.MapPath(Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath")))) Then
 
             If (Container.Grid.GetRowValues(Container.VisibleIndex, "ESSPath").ToString().Length > 0) Then
 

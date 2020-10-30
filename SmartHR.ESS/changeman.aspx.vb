@@ -17,7 +17,7 @@
 
         OriginatorDetails = GetSQLFields("SELECT A.OriginatorCompanyNum, A.OriginatorEmployeeNum FROM [ess.Path] A WHERE A.ID = '" & PathID & "'")
 
-        StatusCheck = GetSQLFields("SELECT TOP(1) (CASE WHEN A.[Actioner] = A.[Originator] THEN 'RETURN' ELSE 'PROCEED' END) AS [Status], (SELECT COUNT(*) FROM [ess.Reject] WHERE [PathID] = A.[ID] AND [ActionedBy] = '" & Session("LoggedOn").UserID & "') AS [Count], (CASE WHEN C.[Key] = 'DEPENDANTS' THEN 'DEPENDANTS' ELSE 'NORMAL' END) AS [Type] FROM [ess.Path] AS A INNER JOIN [ess.Change] AS B ON A.ID = B.PathID INNER JOIN [ess.Policy] AS C ON C.ID = B.PolicyID WHERE A.ID = '" & PathID & "'")
+        StatusCheck = GetSQLFields("SELECT TOP(1) (CASE WHEN A.[Actioner] = A.[Originator] THEN 'RETURN' ELSE 'PROCEED' END) AS [Status], (SELECT COUNT(*) FROM [ess.Reject] WHERE [PathID] = A.[ID] AND [ActionedBy] = 4) AS [Count], (CASE WHEN C.[Key] = 'DEPENDANTS' THEN 'DEPENDANTS' ELSE 'NORMAL' END) AS [Type] FROM [ess.Path] AS A LEFT JOIN [ess.Change] AS B ON A.ID = B.PathID LEFT JOIN [ess.Policy] AS C ON C.ID = B.PolicyID WHERE A.ID = '" & PathID & "'")
 
         Template = GetSQLField("SELECT TOP(1) [Template] FROM [ess.Change] WHERE ([PathID] = " & PathID & ")", "Template")
 
@@ -36,32 +36,38 @@
         UDetails = GetUserDetails(Session, Template, True)
 
         With UDetails
-            'Adjusted retrieved query for items in the changeman.vb and Created an insert query for 'Change: Complete' email type. 
-            'removed filter 'and SIGN([c].[Level]) = 1' in query.
-            LoadExpGrid(Session, dgView_001, Template, "<Tablename=ess.Change><Join=(([{%Tablename%}] as [c] left outer join [AssemblyLU] as [d] on [c].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [c].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [c].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + cast([c].[PolicyID] as nvarchar(3))", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + [c].[ValueF] + ' ' + [c].[ValueT]") & "><Columns=[c].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN 'Dependents' + ' (' + [c].[AdditionalFilter] + ') : ' + [c].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [c].[ValueF], [c].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([c].[PathID] = " & PathID & " )>")
-            'amanriza - end
-            LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN 'Dependents' + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = '" & Session("LoggedOn").UserID & "')>")
-
-            Dim xDataTable As DataTable = Nothing
-
-            Dim xRemarks As String = String.Empty
 
             Try
+                'Adjusted retrieved query for items in the changeman.vb and Created an insert query for 'Change: Complete' email type. 
+                'removed filter 'and SIGN([c].[Level]) = 1' in query.
+                LoadExpGrid(Session, dgView_001, Template, "<Tablename=ess.Change><Join=(([{%Tablename%}] as [c] left outer join [AssemblyLU] as [d] on [c].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [c].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [c].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + cast([c].[PolicyID] as nvarchar(3))", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + [c].[ValueF] + ' ' + [c].[ValueT]") & "><Columns=[c].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN 'Dependents' + ' (' + [c].[AdditionalFilter] + ') : ' + [c].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [c].[ValueF], [c].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([c].[PathID] = " & PathID & " )>")
+                'amanriza - end
+                LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN 'Dependents' + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = 4")
+                'LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN 'Dependents' + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = '" & Session("LoggedOn").UserID & "')>")
 
-                xDataTable = GetSQLDT("SELECT 'Added By ' + ISNULL(LTRIM(RTRIM(B.Surname)),'') + ', ' + ISNULL(LTRIM(RTRIM(B.FirstName)),'') + ' ' + ISNULL(LTRIM(RTRIM(B.MiddleName)),'') + ' : ' + CONVERT(NVARCHAR(36),A.Remarks) AS [Remarks] FROM [ess.WFRemarks] AS A LEFT JOIN [Personnel] AS B ON A.CompanyNum = B.CompanyNum AND A.EmployeeNum = B.EmployeeNum WHERE A.PathID = " & PathID & " ORDER BY A.CaptureDate ASC", "Change.Remarks." & Session.SessionID)
+                'Dim xDataTable As DataTable = Nothing
 
-                For Each xRow As DataRow In xDataTable.Rows
+                Dim xRemarks As String = String.Empty
 
-                    xRemarks &= xRow("Remarks") & vbNewLine
+                Try
 
-                Next xRow
+                    Dim xDataTable = GetSQLDT("SELECT 'Added By ' + ISNULL(LTRIM(RTRIM(B.Surname)),'') + ', ' + ISNULL(LTRIM(RTRIM(B.FirstName)),'') + ' ' + ISNULL(LTRIM(RTRIM(B.MiddleName)),'') + ' : ' + CONVERT(NVARCHAR(36),A.Remarks) AS [Remarks] FROM [ess.WFRemarks] AS A LEFT JOIN [Personnel] AS B ON A.CompanyNum = B.CompanyNum AND A.EmployeeNum = B.EmployeeNum WHERE A.PathID = " & PathID & " ORDER BY A.CaptureDate ASC", "Change.Remarks." & Session.SessionID)
 
-                txtComments.Text = xRemarks
+                    For Each xRow As DataRow In xDataTable.Rows
+
+                        xRemarks &= xRow("Remarks") & vbNewLine
+
+                    Next xRow
+
+                    txtComments.Text = xRemarks
+
+                Catch ex As Exception
+
+                End Try
 
             Catch ex As Exception
 
             End Try
-
         End With
 
         cmdSubmit.Visible = IIf(StatusCheck(0).ToString() <> "RETURN", True, False)
@@ -255,28 +261,7 @@
                         Dim EmailPathData() As Object = GetPathLU(PathID)
 
                         If JustApproved > 0 Then
-                            SendEmailThreadWithBodyActions(New Object() {ServerPath, GetEmailID(IIf(ForApproval > 0, "Change: Auto-Approve", "Change: Completed")), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, PathID,
-                                Function(htmlBody)
-
-                                    Dim remarksValue = "<p style='font-weight:bold'>REMARKS</p>"
-
-                                    'Dim value As DataTable = GetSQLDT("SELECT top 1 SUBSTRING(( SELECT CONCAT( ',', + FORMAT (st1.CaptureDate, 'MMM d yyyy HH:mm:ss') + ': ', ST1.Remarks) AS [text()] FROM [ess.WFRemarks] ST1 inner join Personnel p on p.EmployeeNum = ST1.EmployeeNum WHERE ST1.PathID = ST2.PathID ORDER BY ST1.PathID FOR XML PATH ('') ), 2, 1000) [Students] FROM [ess.WFRemarks] ST2 where PathID = " + PathID)
-                                    Dim value As DataTable = GetSQLDT("SELECT top 1 SUBSTRING(( SELECT CONCAT( '{br}', + FORMAT (st1.CaptureDate, 'MMM d yyyy') + ': ', ST1.Remarks) AS [text()] FROM [ess.WFRemarks] ST1 inner join Personnel p on p.EmployeeNum = ST1.EmployeeNum WHERE ST1.PathID = ST2.PathID ORDER BY ST1.PathID FOR XML PATH ('') ), 5, 1000) [Students] FROM [ess.WFRemarks] ST2 where PathID = " + PathID)
-
-                                    If (value.Rows.Count = 0 And Values(1) = "") Then
-                                        htmlBody = htmlBody.Replace("</br></br>{REMARKS}", "")
-                                    Else
-                                        remarksValue = "<p style='font-weight:bold '>REMARKS</p>"
-                                        remarksValue += Now().ToString("MMM dd yyyy HH:mm:ss") + ": " + Values(1) + "</br>"
-
-                                        If (value.Rows.Count > 0) Then
-                                            Values(1) += value.Rows(0)(0).ToString().Replace("{br}", "</br>")
-                                        End If
-                                    End If
-
-                                    Return htmlBody.Replace("{REMARKS}", remarksValue)
-                                End Function
-                            })
+                            SendEmailThread(New Object() {ServerPath, GetEmailID(IIf(ForApproval > 0, "Change: Auto-Approve", "Change: Completed")), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, PathID})
                         End If
 
                         If ForApproval > 0 Then
@@ -308,6 +293,19 @@
                             'End If
                             ''amanriza - end
 
+                            If (Values(1).Length > 0) Then
+
+                                Dim actioner As String = Session("LoggedOn").EmployeeNum
+
+                                'If (Session("SelectedEmp") = Session("LoggedOn").EmployeeNum) Then
+                                '    actioner = Session("LoggedOn").EmployeeNum
+                                'Else
+                                '    actioner = Session("LoggedOn").EmployeeNum & "(" & Session("SelectedEmp") & ")"
+                                'End If
+
+                                bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & actioner & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
+                            End If
+
                             If (Values(1).Length > 0) Then bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
 
                             e.Result = "tasks.aspx tools/index.aspx"
@@ -316,23 +314,32 @@
 
                     ElseIf (Values(0).ToUpper() = "REJECT") Then
 
+                        If (Values(1).Length > 0) Then
+
+                            Dim actioner As String = Session("LoggedOn").EmployeeNum
+
+                            'If (Session("SelectedEmp") = Session("LoggedOn").EmployeeNum) Then
+                            '    actioner = Session("LoggedOn").EmployeeNum
+                            'Else
+                            '    actioner = Session("LoggedOn").EmployeeNum & "(" & Session("SelectedEmp") & ")"
+                            'End If
+
+                            Dim value = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & actioner & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
+
+                        End If
+
                         'bSaved = ExecSQL("exec [ess.WFProc] '" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & UDetails.CompanyNum & "', '" & UDetails.EmployeeNum & "', " & PathID & ", 'Change', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & GetXML(PathData, KeyName:="ActionType") & "', '" & Now.ToString("yyyy-MM-dd HH:mm:ss") & "'")
                         bSaved = ExecSQL("exec [ess.WFProc] '" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & OriginatorDetails(0) & "', '" & OriginatorDetails(1) & "', " & PathID & ", 'Change', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & IIf(Values(0).ToUpper() = "APPROVE", "Approve", "Reject") & "', '" & GetXML(PathData, KeyName:="ActionType") & "', '" & Now.ToString("yyyy-MM-dd HH:mm:ss") & "'")
 
                         If (bSaved) Then
 
-                            If (Values(1).Length > 0) Then
-                                bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
-
-                                'Added a condition if the item is rejected
-                                If (HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
-                                    bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & DirectCast(ESSActionedBy.Rejected, Int32) & "' WHERE PathID = " & PathID & "")
-                                    'bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & OriginatorDetails(1) & "' WHERE PathID = " & PathID & "")
-                                Else
-                                    bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & DirectCast(ESSActionedBy.Rejected, Int32) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
-                                    'bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & OriginatorDetails(1) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
-
-                                End If
+                            'Added a condition if the item is rejected
+                            If (HasRows("SELECT * FROM [ess.Reject] WHERE PathID = " & PathID & " ")) Then
+                                bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & DirectCast(ESSActionedBy.Rejected, Int32) & "' WHERE PathID = " & PathID & "")
+                                'bSaved = ExecSQL("UPDATE [ess.Reject] set ActionedBy = '" & OriginatorDetails(1) & "' WHERE PathID = " & PathID & "")
+                            Else
+                                bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & DirectCast(ESSActionedBy.Rejected, Int32) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
+                                'bSaved = ExecSQL(String.Format("INSERT INTO [ess.Reject]" & "SELECT *,'" & OriginatorDetails(1) & "' FROM [ess.Change] WHERE PathID = " & PathID & " "))
 
                             End If
 
@@ -357,30 +364,20 @@
                                                               "SELECT *, " & DirectCast(ESSActionedBy.Returned, Int32) & " FROM [ess.Change] WHERE PathID = " & PathID & " ")
                             End If
 
-                            SendEmailThreadWithBodyActions(New Object() {ServerPath, GetEmailID(IIf(StatusCheck(0).ToString() = "RETURN", "Change: Submitted Revision", "Change: Returned for Revision")), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, PathID,
-                                    Function(htmlBody)
+                            If (Values(1).Length > 0) Then
 
-                                        Dim remarksValue = "<p style='font-weight:bold'>REMARKS</p>"
+                                Dim actioner As String = Session("LoggedOn").EmployeeNum
 
-                                        'Dim value As DataTable = GetSQLDT("SELECT top 1 SUBSTRING(( SELECT CONCAT( ',', + FORMAT (st1.CaptureDate, 'MMM d yyyy HH:mm:ss') + ': ', ST1.Remarks) AS [text()] FROM [ess.WFRemarks] ST1 inner join Personnel p on p.EmployeeNum = ST1.EmployeeNum WHERE ST1.PathID = ST2.PathID ORDER BY ST1.PathID FOR XML PATH ('') ), 2, 1000) [Students] FROM [ess.WFRemarks] ST2 where PathID = " + PathID)
-                                        Dim value As DataTable = GetSQLDT("SELECT top 1 SUBSTRING(( SELECT CONCAT( '{br}', + FORMAT (st1.CaptureDate, 'MMM d yyyy') + ': ', ST1.Remarks) AS [text()] FROM [ess.WFRemarks] ST1 inner join Personnel p on p.EmployeeNum = ST1.EmployeeNum WHERE ST1.PathID = ST2.PathID ORDER BY ST1.PathID FOR XML PATH ('') ), 5, 1000) [Students] FROM [ess.WFRemarks] ST2 where PathID = " + PathID)
+                                'If (Session("SelectedEmp") = Session("LoggedOn").EmployeeNum) Then
+                                '    actioner = Session("LoggedOn").EmployeeNum
+                                'Else
+                                '    actioner = Session("LoggedOn").EmployeeNum & "(" & Session("SelectedEmp") & ")"
+                                'End If
 
-                                        If (value.Rows.Count = 0 And Values(1) = "") Then
-                                            htmlBody = htmlBody.Replace("</br></br>{REMARKS}", "")
-                                        Else
-                                            remarksValue = "<p style='font-weight:bold '>REMARKS</p>"
-                                            remarksValue += Now().ToString("MMM dd yyyy HH:mm:ss") + ": " + Values(1) + "</br>"
+                                bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & actioner & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
+                            End If
 
-                                            If (value.Rows.Count > 0) Then
-                                                Values(1) += value.Rows(0)(0).ToString().Replace("{br}", "</br>")
-                                            End If
-                                        End If
-
-                                        Return htmlBody.Replace("{REMARKS}", remarksValue)
-                                    End Function
-                            })
-
-                            If (Values(1).Length > 0) Then bSaved = ExecSQL("insert into [ess.WFRemarks]([CompanyNum], [EmployeeNum], [CaptureDate], [Remarks], [PathID]) values('" & Session("LoggedOn").CompanyNum & "', '" & Session("LoggedOn").EmployeeNum & "', '" & Now().ToString("yyyy-MM-dd HH:mm:ss") & "', '" & GetDataText(Values(1)) & "', " & PathID & ")")
+                            SendEmailThread(New Object() {ServerPath, GetEmailID(IIf(StatusCheck(0).ToString() = "RETURN", "Change: Submitted Revision", "Change: Returned for Revision")), "<SendTo=" & objUserData(0).ToString() & "><CC=><BCC=>", String.Empty, False, EmailPathData, PathID})
 
                             If (bSaved) Then e.Result = "tasks.aspx tools/index.aspx"
 
@@ -598,13 +595,17 @@
 
     Private Sub dgView_001_RowDeleting(ByVal sender As Object, ByVal e As DevExpress.Web.Data.ASPxDataDeletingEventArgs) Handles dgView_001.RowDeleting
 
-        ExecSQL("DELETE FROM [ess.Change] WHERE (" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[CompanyNum] + ' ' + [EmployeeNum] + ' ' + CONVERT(NVARCHAR(19), [NotifyDate], 120) + ' ' + CAST([PolicyID] AS NVARCHAR(3))", "[CompanyNum] + ' ' + [EmployeeNum] + ' ' + CONVERT(NVARCHAR(19), [NotifyDate], 120) + ' ' + [ValueF] + ' ' + [ValueT]") & " = '" & e.Keys("CompositeKey") & "')")
+        Dim changeWhereClause = "WHERE (" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[CompanyNum] + ' ' + [EmployeeNum] + ' ' + CONVERT(NVARCHAR(19), [NotifyDate], 120) + ' ' + CAST([PolicyID] AS NVARCHAR(3))", "[CompanyNum] + ' ' + [EmployeeNum] + ' ' + CONVERT(NVARCHAR(19), [NotifyDate], 120) + ' ' + [ValueF] + ' ' + [ValueT]") & " = '" & e.Keys("CompositeKey") & "')"
 
-        ExecSQL("UPDATE [ess.Reject] SET ActionedBy = '" & Session("LoggedOn").UserID & "' where ([CompanyNum] + ' ' + [EmployeeNum] + ' ' + convert(nvarchar(19), [NotifyDate], 120) + ' ' + cast([PolicyID] as nvarchar(3)) = '" & e.Keys("CompositeKey") & "')")
+        Dim value = ExecSQL("INSERT INTO [ess.Reject] select *, 4 from [ess.Change] " & changeWhereClause)
+
+        value = ExecSQL("DELETE FROM [ess.Change] " & changeWhereClause)
+
+        'value = ExecSQL("UPDATE [ess.Reject] SET ActionedBy = '" & Session("LoggedOn").UserID & "' where ([CompanyNum] + ' ' + [EmployeeNum] + ' ' + convert(nvarchar(19), [NotifyDate], 120) + ' ' + cast([PolicyID] as nvarchar(3)) = '" & e.Keys("CompositeKey") & "')")
 
         LoadExpGrid(Session, dgView_001, Template, "<Tablename=ess.Change><Join=(([{%Tablename%}] as [c] left outer join [AssemblyLU] as [d] on [c].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [c].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [c].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + cast([c].[PolicyID] as nvarchar(3))", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + [c].[ValueF] + ' ' + [c].[ValueT]") & "><Columns=[c].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [c].[AdditionalFilter] + ') : ' + [c].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [c].[ValueF], [c].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([c].[PathID] = " & PathID & " and SIGN([c].[Level]) = 1)>")
 
-        LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = '" & Session("LoggedOn").UserID & "')>")
+        LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = 4")
 
         e.Cancel = True
 
@@ -616,7 +617,7 @@
 
         LoadExpGrid(Session, dgView_001, Template, "<Tablename=ess.Change><Join=(([{%Tablename%}] as [c] left outer join [AssemblyLU] as [d] on [c].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [c].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [c].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + cast([c].[PolicyID] as nvarchar(3))", "[c].[CompanyNum] + ' ' + [c].[EmployeeNum] + ' ' + convert(nvarchar(19), [c].[NotifyDate], 120) + ' ' + [c].[ValueF] + ' ' + [c].[ValueT]") & "><Columns=[c].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [c].[AdditionalFilter] + ') : ' + [c].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [c].[ValueF], [c].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([c].[PathID] = " & PathID & " and SIGN([c].[Level]) = 1)>")
 
-        LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = '" & Session("LoggedOn").UserID & "')>")
+        LoadExpGrid(Session, dgView_002, Template, "<Tablename=ess.Reject><Join=(([{%Tablename%}] as [r] left outer join [AssemblyLU] as [d] on [r].[AssemblyID] = [d].[ID]) left outer join [ess.Policy] as [p] on [r].[PolicyID] = [p].[ID]) left outer join [ess.PolicyMapping] as [m] on [r].[PolicyID] = [m].[PolicyID]><PrimaryKey=" & IIf(StatusCheck(2).ToString() <> "DEPENDANTS", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + cast([r].[PolicyID] as nvarchar(3))", "[r].[CompanyNum] + ' ' + [r].[EmployeeNum] + ' ' + convert(nvarchar(19), [r].[NotifyDate], 120) + ' ' + [r].[ValueF] + ' ' + [r].[ValueT]") & "><Columns=[r].[PolicyID], [d].[Assembly], [d].[TypeName] as [AssemblyTypeName], [p].[Key], (CASE WHEN [p].[Label] = 'DEPENDANTS' THEN [p].[Label] + ' (' + [r].[AdditionalFilter] + ') : ' + [r].[AdditionalName] ELSE [m].[ItemName] END) AS [Label], (select [DataType] from [DataTypeLU] where ([ID] = [p].[DataTypeID])) as [DataType], [r].[ValueF], [r].[ValueT], [p].[LookupTable], [p].[LookupText], [p].[LookupValue], [p].[LookupFilter]><Where=([r].[PathID] = " & PathID & " and [r].[ActionedBy] = 4")
 
         e.Cancel = True
 
